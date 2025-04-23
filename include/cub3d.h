@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/23 16:17:14 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/23 16:24:47 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 //player_starting_direction is N, S, E or W
 typedef struct s_gmap
 {
-	char	**map;
+	char	**map_arr;
 	char	*n_wall_path_texture;
 	char	*s_wall_path_texture;
 	char	*w_wall_path_texture;
