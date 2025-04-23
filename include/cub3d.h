@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/23 22:07:38 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/23 23:54:55 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@
 # define PI 3.14159265358979323846
 //used to change how far the player moves per timestep
 # define SPEED 0.05
+//used to change how far the player turns per timestep
+# define TURN_SPEED 0.05
 //inputs
-# define NO_FB 0
+# define NO_MOVE 0
 # define FORWARD 1
-# define BACKWARD 2
+# define BACKWARD -1
 # define NO_TURN 0
-# define LEFT 1
-# define RIGHT 2
+# define LEFT -1
+# define RIGHT 1
 
 //map_structure
 //player_starting_direction is N, S, E or W

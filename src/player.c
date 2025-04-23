@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 21:30:55 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/23 22:12:52 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/24 00:02:13 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,24 @@ t_player	*init_player(t_gmap *gmap, t_player *player)
 	player->y_pos = (double)gmap->player_starting_y_pos;
 	direction = gmap->player_starting_direciton;
 	if (direction == 'N')
-		player->direction_radians = (PI * 3.0) / 2.0;
+		player->direction_radians = PI * 1.5;
 	else if (direction == 'S')
-		player->direction_radians = PI / 2.0;
+		player->direction_radians = PI / 2;
 	else if (direction == 'E')
 		player->direction_radians = 0;
 	else if (direction == 'W')
 		player->direction_radians = PI;
 	update_step_sizes(player);
+}
+
+void	update_player(int move, int turn, t_player *player)
+{
+	double	cur_dir;
+
+	player->x_pos += player->x_stepsize * move;
+	player->y_pos += player->y_stepsize * move;
+	cur_dir = player->direction_radians;
+	player->direction_radians += (double)turn * TURN_SPEED;
+	if (cur_dir != player->direction_radians)
+		update_step_sizes(player);
 }
