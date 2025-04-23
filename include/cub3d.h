@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/23 21:30:14 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/23 22:07:38 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 //PI used for angles
 # define PI 3.14159265358979323846
 //used to change how far the player moves per timestep
-# define DEFAULT_STEP 0.05
+# define SPEED 0.05
 //inputs
 # define NO_FB 0
 # define FORWARD 1
