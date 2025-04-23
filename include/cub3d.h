@@ -6,12 +6,20 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/23 16:24:47 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/23 21:19:34 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+# include "../libft/libft.h"
+# include "../minilibx-linux/mlx.h"
+# include <fcntl.h>
+# include <errno.h>
+# include <math.h>
+
+# define PI 3.14159265358979323846
+
 //map_structure
 //player_starting_direction is N, S, E or W
 typedef struct s_gmap
