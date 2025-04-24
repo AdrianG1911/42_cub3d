@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 21:30:55 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/24 13:30:03 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:39:29 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_player	*init_player(t_gmap *gmap, t_player *player)
 {
 	char		direction;
 
-	player->x_pos = (double)gmap->player_starting_x_pos;
-	player->y_pos = (double)gmap->player_starting_y_pos;
+	player->x_pos = (double)gmap->player_starting_x_pos + 0.5;
+	player->y_pos = (double)gmap->player_starting_y_pos + 0.5;
 	direction = gmap->player_starting_direciton;
 	if (direction == 'N')
 		player->direction_radians = PI * 1.5;
