@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 21:30:55 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/24 13:13:08 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:30:03 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ t_player	*init_player(t_gmap *gmap, t_player *player)
 
 double	normalize_angle(double angle)
 {
+	if (angle >= 0 && angle < PI * 2.0)
+		return (angle);
 	angle = fmod(angle, PI * 2.0);
 	if (angle < 0)
 		angle += PI * 2.0;
@@ -46,15 +48,14 @@ double	normalize_angle(double angle)
 
 void	update_player(int move, int turn, t_player *player)
 {
-	double	cur_dir;
+	double	new_dir;
 
 	player->x_pos += player->x_stepsize * move;
 	player->y_pos += player->y_stepsize * move;
-	cur_dir = player->direction_radians;
-	player->direction_radians += (double)turn * TURN_SPEED;
-	if (cur_dir != player->direction_radians)
+	new_dir = player->direction_radians + ((double)turn * TURN_SPEED);
+	if (new_dir != player->direction_radians)
 	{
-		player->direction_radians = normalize_angle(player->direction_radians);
+		player->direction_radians = normalize_angle(new_dir);
 		update_step_sizes(player);
 	}
 }
