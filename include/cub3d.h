@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/24 13:27:25 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:51:32 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,11 @@ typedef struct s_player
 	double	x_pos;
 	double	y_pos;
 }	t_player;
+
+//player.c
+void		update_player(int move, int turn, t_player *player);
+void		update_step_sizes(t_player *player);
+t_player	*init_player(t_gmap *gmap, t_player *player);
+double		normalize_angle(double angle);
 
 #endif
