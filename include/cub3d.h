@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/24 13:51:32 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/24 22:16:04 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 typedef struct s_gmap
 {
 	char	**map_arr;
+	int		map_height;
+	int		map_width;
 	char	*n_wall_path_texture;
 	char	*s_wall_path_texture;
 	char	*w_wall_path_texture;
