@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 00:22:24 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/25 19:21:43 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/25 19:24:02 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	ray_caster(t_rays *rays, t_gmap *gmap, t_player *player)
 	{
 		ray_angle = player->direction_radians - \
 		(FOV / 2.0) + ((i + 0.5) * (FOV / SCREEN_W));
+		normalize_angle(ray_angle);
 		ray_travel(ray_angle, rays, gmap, player);
 		rays->distances[i] = rays->r_distance;
 		rays->on_wall_x_poses[i] = rays->wall_hit_x;

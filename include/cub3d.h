@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/25 19:18:16 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/25 19:23:56 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void		update_player(int move, int turn, t_player *player);
 void		update_step_sizes(t_player *player);
 t_player	*init_player(t_gmap *gmap, t_player *player);
 double		normalize_angle(double angle);
-//raycaster
+//raycaster.c / raycaster_2.c
+void		ray_caster(t_rays *rays, t_gmap *gmap, t_player *player);
 void		calc_wall_face(t_rays *rays);
+
 #endif
