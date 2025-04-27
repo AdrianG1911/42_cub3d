@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/27 17:22:49 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/27 21:43:41 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,24 @@ typedef struct s_game
 	void		*win;
 	t_gmap		gmap;
 	t_player	player;
+	int			move_foward_flag;
+	int			move_back_flag;
+	int			turn_left_flag;
+	int			turn_right_flag;
 	t_rays		rays;
 }	t_game;
 
 //player.c
 void		update_player(int move, int turn, t_player *player);
 void		update_step_sizes(t_player *player);
-t_player	*init_player(t_gmap *gmap, t_player *player);
+void		init_player(t_gmap *gmap, t_player *player);
 double		normalize_angle(double angle);
 //raycaster.c / raycaster_2.c
 void		ray_caster(t_rays *rays, t_gmap *gmap, t_player *player);
 void		calc_wall_face(t_rays *rays);
+//input
+int			key_press(int keycode, void *param);
+int			key_release(int keycode, void *param);
+int			close_window(void *param);
 
 #endif

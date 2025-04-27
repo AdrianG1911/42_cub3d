@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 21:30:55 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/24 13:51:36 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/27 21:46:36 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	update_step_sizes(t_player *player)
 	player->y_stepsize = sin(player->direction_radians) * SPEED;
 }
 
-t_player	*init_player(t_gmap *gmap, t_player *player)
+void	init_player(t_gmap *gmap, t_player *player)
 {
 	char		direction;
 

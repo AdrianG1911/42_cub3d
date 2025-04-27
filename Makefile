@@ -6,7 +6,7 @@
 #    By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/23 20:11:53 by adrgutie          #+#    #+#              #
-#    Updated: 2025/04/27 17:37:46 by adrgutie         ###   ########.fr        #
+#    Updated: 2025/04/27 21:38:54 by adrgutie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,12 @@ RM			=	rm -fr
 OBJ_DIR		=	obj
 
 SRCS		=	src/main.c \
-				#src/input.c \
+				src/input.c \
+				src/raycaster.c \
+				src/raycaster_2.c \
+				src/player.c \
 				#src/map_validation.c \
 				#src/parse.c \
-				#src/player.c \
-				#src/raycaster.c \
 				#src/renderer.c 
 
 OBJS		=	$(SRCS:src/%.c=$(OBJ_DIR)/%.o)

@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 00:22:24 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/25 19:26:50 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/27 21:40:07 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ray_travel_step_side_dist(t_rays *rays, t_player *player)
 }
 
 void	ray_travel_setup(double ray_angle, t_rays *rays, \
-	t_gmap *gmap, t_player *player)
+		t_player *player)
 {
 	rays->ray_dir_x = cos(ray_angle);
 	rays->ray_dir_y = sin(ray_angle);
@@ -54,7 +54,7 @@ void	ray_travel_setup(double ray_angle, t_rays *rays, \
 void	ray_travel(double ray_angle, t_rays *rays, \
 	t_gmap *gmap, t_player *player)
 {
-	ray_travel_setup(ray_angle, rays, gmap, player);
+	ray_travel_setup(ray_angle, rays, player);
 	while (rays->hit != 1)
 	{
 		if (rays->side_dist_x < rays->side_dist_y)
