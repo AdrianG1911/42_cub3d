@@ -6,7 +6,7 @@
 #    By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/23 20:11:53 by adrgutie          #+#    #+#              #
-#    Updated: 2025/04/23 21:19:42 by adrgutie         ###   ########.fr        #
+#    Updated: 2025/04/27 17:37:46 by adrgutie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,17 +14,17 @@ NAME		=	cub3D
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
 LDFLAGS		=	-Llibft -Lminilibx-linux
-LDLIBS		=	-lft -lmlx_Linux -lm -lXext -lx11
+LDLIBS		=	-lft -lmlx_Linux -lm -lXext -lX11
 RM			=	rm -fr
 OBJ_DIR		=	obj
 
-SRCS		=	src/main.c
-				src/input.c
-				src/map_validation.c
-				src/parse.c
-				src/player.c
-				src/raycaster.c
-				src/renderer.c
+SRCS		=	src/main.c \
+				#src/input.c \
+				#src/map_validation.c \
+				#src/parse.c \
+				#src/player.c \
+				#src/raycaster.c \
+				#src/renderer.c 
 
 OBJS		=	$(SRCS:src/%.c=$(OBJ_DIR)/%.o)
 

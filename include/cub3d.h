@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/25 19:36:00 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/27 17:22:49 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <math.h>
 
 //resolution
-# define SCREEN_H 900
-# define SCREEN_W 1200
+# define SCREEN_H 600
+# define SCREEN_W 800
 //FOV
 # define FOV 1.0471975511965977461542
 //PI used for angles
@@ -87,6 +87,15 @@ typedef struct s_rays
 	int		map_x;
 	int		map_y;
 }	t_rays;
+
+typedef struct s_game
+{
+	void		*mlx;
+	void		*win;
+	t_gmap		gmap;
+	t_player	player;
+	t_rays		rays;
+}	t_game;
 
 //player.c
 void		update_player(int move, int turn, t_player *player);
