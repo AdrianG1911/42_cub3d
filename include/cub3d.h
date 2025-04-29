@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/30 03:00:50 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/30 03:07:02 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ typedef struct s_render
 	t_texture		south_wall_texture;
 	unsigned int	floor_color;
 	unsigned int	ceiling_color;
-
+	int				wall_height;
+	int				wall_slice_index;
 }	t_render;
 
 typedef struct s_game

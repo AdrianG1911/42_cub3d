@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 17:36:13 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/30 03:03:17 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/30 03:10:00 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,14 @@ void	init_render(t_game *game, t_gmap *gmap, t_render *render)
 
 void	render_loop(t_rays *rays, t_texture *image_buffer, t_render *render)
 {
-	int	wall_height;
-	int	wall_slice_index;
-
 	draw_floor_and_cieling(render, image_buffer);
 	image_buffer->x = 0;
 	while (image_buffer->x < SCREEN_W)
 	{
-		wall_height = SCREEN_H / rays->distances_corrected[image_buffer->x];
-		wall_height &= ~1;
-		wall_slice_index = get_wall_point(render, rays, image_buffer);
+		render->wall_height = (int)(SCREEN_H / \
+				rays->distances_corrected[image_buffer->x]);
+		render->wall_height &= ~1;
+		render->wall_slice_index = get_wall_point(render, rays, image_buffer);
 		image_buffer->y = 0;
 		image_buffer->x++;
 	}
