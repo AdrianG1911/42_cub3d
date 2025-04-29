@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/27 21:43:41 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/30 03:00:50 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_player
 
 typedef struct s_rays
 {
-	double	distances[SCREEN_W];
+	double	distances_corrected[SCREEN_W];
 	double	on_wall_x_poses[SCREEN_W];
 	double	on_wall_y_poses[SCREEN_W];
 	char	wall_faces_hit[SCREEN_W];
@@ -88,6 +88,31 @@ typedef struct s_rays
 	int		map_y;
 }	t_rays;
 
+typedef struct s_texture
+{
+	void	*img_ptr;
+	char	*raw_data;
+	int		width;
+	int		height;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		x;
+	int		y;
+}	t_texture;
+
+typedef struct s_render
+{
+	t_texture		image_buffer;
+	t_texture		north_wall_texture;
+	t_texture		east_wall_texture;
+	t_texture		west_wall_texture;
+	t_texture		south_wall_texture;
+	unsigned int	floor_color;
+	unsigned int	ceiling_color;
+
+}	t_render;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -99,6 +124,7 @@ typedef struct s_game
 	int			turn_left_flag;
 	int			turn_right_flag;
 	t_rays		rays;
+	t_render	render;
 }	t_game;
 
 //player.c
@@ -113,5 +139,10 @@ void		calc_wall_face(t_rays *rays);
 int			key_press(int keycode, void *param);
 int			key_release(int keycode, void *param);
 int			close_window(void *param);
+//render
+void		init_render(t_game *game, t_gmap *gmap, t_render *render);
+void		draw_floor_and_cieling(t_render *render, t_texture *image_buffer);
+int			get_wall_point(t_render *render, t_rays *rays, \
+			t_texture *image_buffer);
 
 #endif

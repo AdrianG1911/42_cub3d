@@ -6,7 +6,7 @@
 #    By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/23 20:11:53 by adrgutie          #+#    #+#              #
-#    Updated: 2025/04/27 21:38:54 by adrgutie         ###   ########.fr        #
+#    Updated: 2025/04/30 02:32:39 by adrgutie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,10 @@ SRCS		=	src/main.c \
 				src/raycaster.c \
 				src/raycaster_2.c \
 				src/player.c \
+				src/renderer.c \
+				src/renderer_2.c \
 				#src/map_validation.c \
-				#src/parse.c \
-				#src/renderer.c 
+				#src/parse.c 
 
 OBJS		=	$(SRCS:src/%.c=$(OBJ_DIR)/%.o)
 
