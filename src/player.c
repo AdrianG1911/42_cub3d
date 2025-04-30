@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 21:30:55 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/27 21:46:36 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/30 18:52:28 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ double	normalize_angle(double angle)
 	return (angle);
 }
 
-void	update_player(int move, int turn, t_player *player)
+void	update_player(int move, int turn, t_player *player, t_gmap *gmap)
 {
 	double	new_dir;
+	char	cur_tile;
 
 	player->x_pos += player->x_stepsize * move;
 	player->y_pos += player->y_stepsize * move;
@@ -58,5 +59,11 @@ void	update_player(int move, int turn, t_player *player)
 	{
 		player->direction_radians = normalize_angle(new_dir);
 		update_step_sizes(player);
+	}
+	cur_tile = gmap->map_arr[(int)player->y_pos][(int)player->x_pos];
+	if (cur_tile == '1' || cur_tile == ' ')
+	{
+		player->x_pos = (double)gmap->player_starting_x_pos + 0.5;
+		player->y_pos = (double)gmap->player_starting_y_pos + 0.5;
 	}
 }

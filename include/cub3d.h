@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/30 03:07:02 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/30 19:03:38 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <math.h>
+# include <sys/time.h>
 
 //resolution
-# define SCREEN_H 600
-# define SCREEN_W 800
+# define SCREEN_H 900
+# define SCREEN_W 1200
 //FOV
 # define FOV 1.0471975511965977461542
 //PI used for angles
@@ -99,6 +100,8 @@ typedef struct s_texture
 	int		endian;
 	int		x;
 	int		y;
+	double	pixel_per_screen_pixel;
+	double	drawing_pos;
 }	t_texture;
 
 typedef struct s_render
@@ -112,6 +115,7 @@ typedef struct s_render
 	unsigned int	ceiling_color;
 	int				wall_height;
 	int				wall_slice_index;
+	t_texture		current_wall;
 }	t_render;
 
 typedef struct s_game
@@ -129,7 +133,7 @@ typedef struct s_game
 }	t_game;
 
 //player.c
-void		update_player(int move, int turn, t_player *player);
+void		update_player(int move, int turn, t_player *player, t_gmap *gmap);
 void		update_step_sizes(t_player *player);
 void		init_player(t_gmap *gmap, t_player *player);
 double		normalize_angle(double angle);
@@ -144,6 +148,11 @@ int			close_window(void *param);
 void		init_render(t_game *game, t_gmap *gmap, t_render *render);
 void		draw_floor_and_cieling(t_render *render, t_texture *image_buffer);
 int			get_wall_point(t_render *render, t_rays *rays, \
-			t_texture *image_buffer);
+				t_texture *image_buffer);
+void		set_cur_wall(t_render *render, t_rays *rays, \
+				t_texture *image_buffer);
+void		draw_wall(t_render *render, t_texture *image_buffer);
+void		render_loop(t_rays *rays, t_texture *image_buffer, \
+				t_render *render);
 
 #endif

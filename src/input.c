@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 20:25:32 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/27 21:41:23 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/30 18:45:48 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	code_to_key(int keycode)
 		return ('R');
 	if (keycode == 119)
 		return ('F');
-	if (keycode == 114)
+	if (keycode == 115)
 		return ('B');
 	if (keycode == 65307)
 		return ('Q');

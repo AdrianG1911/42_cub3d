@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 17:36:13 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/30 03:10:00 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/30 18:20:58 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	render_loop(t_rays *rays, t_texture *image_buffer, t_render *render)
 				rays->distances_corrected[image_buffer->x]);
 		render->wall_height &= ~1;
 		render->wall_slice_index = get_wall_point(render, rays, image_buffer);
-		image_buffer->y = 0;
+		set_cur_wall(render, rays, image_buffer);
+		draw_wall(render, image_buffer);
 		image_buffer->x++;
 	}
 }

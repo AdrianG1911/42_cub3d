@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:00:17 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/29 23:12:38 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/30 19:02:48 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,30 @@ void	err_msg_exit(char *error_msg)
 	exit(1);
 }
 
+long	get_time_mili(void)
+{
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL) != 0)
+		exit (1);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
 int	game_loop(void *param)
 {
 	t_game	*game;
+	long	time_at_last_frame;
 
+	time_at_last_frame = get_time_mili();
 	game = (t_game *)param;
 	update_player(game->move_foward_flag - game->move_back_flag, \
-	game->turn_right_flag - game->turn_left_flag, &(game->player));
+	game->turn_right_flag - game->turn_left_flag, &(game->player), &game->gmap);
 	ray_caster(&(game->rays), &(game->gmap), &(game->player));
-	//rendering step here
+	render_loop(&game->rays, &game->render.image_buffer, &game->render);
+	mlx_put_image_to_window(game->mlx, game->win, \
+		game->render.image_buffer.img_ptr, 0, 0);
+	while (get_time_mili() - time_at_last_frame < 10)
+		;
 	return (0);
 }
 
@@ -43,32 +58,20 @@ void	init_stuff(t_game *game)
 	game->gmap.floor_color_rgb[0] = 100;//test
 	game->gmap.floor_color_rgb[1] = 50;//test
 	game->gmap.floor_color_rgb[2] = 100;//test
+	game->gmap.player_starting_direciton = 'N';//test
+	game->gmap.player_starting_x_pos = 3;//test
+	game->gmap.player_starting_y_pos = 3;//test
+	game->gmap.map_arr = (char **)ft_calloc(6, sizeof(char *));//test
+	game->gmap.map_height = 6;//test
+	game->gmap.map_width = 6;//test
+	game->gmap.map_arr[0] = ft_strdup("111111");//test
+	game->gmap.map_arr[1] = ft_strdup("101011");//test
+	game->gmap.map_arr[2] = ft_strdup("100001");//test
+	game->gmap.map_arr[3] = ft_strdup("100001");//test
+	game->gmap.map_arr[4] = ft_strdup("101001");//test
+	game->gmap.map_arr[5] = ft_strdup("111111");//test
 	init_player(&(game->gmap), &(game->player));
 	init_render(game, &(game->gmap), &(game->render));
-}
-
-void	make_buffer_green(t_texture *main_buffer)//test function
-{
-	int		x;
-	int		y;
-	int		color;
-	char	*pixel;
-
-	color = 0x00FF00;
-	y = 0;
-	while (y < main_buffer->height)
-	{
-		x = 0;
-		while (x < main_buffer->width)
-		{
-			pixel = main_buffer->raw_data + \
-			(y * main_buffer->line_length + x * \
-				(main_buffer->bits_per_pixel / 8));
-			*(unsigned int *)pixel = color;
-			x++;
-		}
-		y++;
-	}
 }
 
 int	main(int argc, char *argv[])
@@ -91,10 +94,7 @@ int	main(int argc, char *argv[])
 	mlx_hook(game.win, 17, 0, close_window, (void *)&game);
 	mlx_hook(game.win, 2, 1L << 0, key_press, (void *)&game);
 	mlx_hook(game.win, 3, 1L << 1, key_release, (void *)&game);
-	//mlx_loop_hook(game.mlx, game_loop, (void *)&game);
-	make_buffer_green(&game.render.image_buffer);
-	mlx_put_image_to_window(game.mlx, game.win, \
-		game.render.image_buffer.img_ptr, 0, 0);
+	mlx_loop_hook(game.mlx, game_loop, (void *)&game);
 	mlx_loop(game.mlx);
 	return (0);
 }

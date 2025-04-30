@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 23:14:02 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/30 03:00:24 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/30 18:42:02 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	draw_floor_and_cieling(t_render *render, t_texture *image_buffer)
 	while (image_buffer->x < SCREEN_W)
 	{
 		image_buffer->y = 0;
-		while (image_buffer < SCREEN_H)
+		while (image_buffer->y < SCREEN_H)
 		{
 			pixel = image_buffer->raw_data + \
 			(image_buffer->y * image_buffer->line_length + image_buffer->x * \
@@ -59,4 +59,59 @@ int	get_wall_point(t_render *render, t_rays *rays, t_texture *image_buffer)
 	if (wall_point_int == render->north_wall_texture.width)
 		wall_point_int--;
 	return (wall_point_int);
+}
+
+void	set_cur_wall(t_render *render, t_rays *rays, t_texture *image_buffer)
+{
+	char	cur_wall;
+
+	cur_wall = rays->wall_faces_hit[image_buffer->x];
+	if (cur_wall == 'N')
+		render->current_wall = render->north_wall_texture;
+	else if (cur_wall == 'E')
+		render->current_wall = render->east_wall_texture;
+	else if (cur_wall == 'W')
+		render->current_wall = render->west_wall_texture;
+	else if (cur_wall == 'S')
+		render->current_wall = render->south_wall_texture;
+}
+
+void	get_and_draw_pixel_to_buffer(t_texture *image_buffer, \
+	t_texture *cur_wall, t_render *render)
+{
+	char			*pixel;
+	unsigned int	color;
+
+	pixel = cur_wall->raw_data + (cur_wall->y * cur_wall->line_length) + \
+		(render->wall_slice_index * (cur_wall->bits_per_pixel / 8));
+	color = *(unsigned int *)pixel;
+	pixel = image_buffer->raw_data + \
+	(image_buffer->y * image_buffer->line_length) + \
+	(image_buffer->x * (image_buffer->bits_per_pixel / 8));
+	*(unsigned int *)pixel = color;
+}
+
+void	draw_wall(t_render *render, t_texture *image_buffer)
+{
+	t_texture		cur_wall;
+
+	cur_wall = render->current_wall;
+	cur_wall.y = 0;
+	image_buffer->y = (SCREEN_H / 2) - (render->wall_height / 2);
+	if (image_buffer->y < 0)
+		image_buffer->y = 0;
+	cur_wall.pixel_per_screen_pixel = \
+		(double)cur_wall.height / render->wall_height;
+	cur_wall.drawing_pos = cur_wall.pixel_per_screen_pixel * \
+		(image_buffer->y - ((SCREEN_H / 2) - (render->wall_height / 2)));
+	if (cur_wall.drawing_pos < 0)
+		cur_wall.drawing_pos = 0;
+	while (image_buffer->y < SCREEN_H && \
+		(int)cur_wall.drawing_pos < cur_wall.height)
+	{
+		cur_wall.y = (int)cur_wall.drawing_pos;
+		get_and_draw_pixel_to_buffer(image_buffer, &cur_wall, render);
+		cur_wall.drawing_pos += cur_wall.pixel_per_screen_pixel;
+		image_buffer->y++;
+	}
 }
