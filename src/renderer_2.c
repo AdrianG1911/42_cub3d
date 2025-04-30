@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 23:14:02 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/30 18:42:02 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/04/30 19:56:30 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	get_wall_point(t_render *render, t_rays *rays, t_texture *image_buffer)
 	else if (wall_face == 'S')
 		wall_point_double = fmod(x_pos, 1.0);
 	else if (wall_face == 'E')
-		wall_point_double = fmod(y_pos, 1.0);
-	else if (wall_face == 'W')
 		wall_point_double = fabs(fmod(y_pos, 1.0) - 1.0);
+	else if (wall_face == 'W')
+		wall_point_double = fmod(y_pos, 1.0);
 	wall_point_int = \
 	((int)(wall_point_double * render->north_wall_texture.width));
 	if (wall_point_int == render->north_wall_texture.width)
