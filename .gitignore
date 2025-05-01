@@ -2,3 +2,4 @@ a.out
 *.a
 *.o
 obj
+cub3D
