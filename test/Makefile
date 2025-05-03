@@ -5,9 +5,7 @@ NAME = test_parser
 SRC = \
 	../src/testing_main.c \
 	../src/map_validation.c \
-	../src/check_file_type.c \
-	../src/create_map_string.c \
-	../src/check_map_borders.c 
+	../src/check_file_type.c 
 OBJ = $(SRC:.c=.o)
 
 INCLUDES = -I../include -I../libft
