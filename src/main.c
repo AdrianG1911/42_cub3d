@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:00:17 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/30 19:29:59 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/05/03 20:48:57 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	game_loop(void *param)
 	render_loop(&game->rays, &game->render.image_buffer, &game->render);
 	mlx_put_image_to_window(game->mlx, game->win, \
 		game->render.image_buffer.img_ptr, 0, 0);
-	while (get_time_mili() - time_at_last_frame < 10)
+	while (get_time_mili() - time_at_last_frame < 15)
 		;
 	return (0);
 }
@@ -48,10 +48,10 @@ int	game_loop(void *param)
 void	init_stuff(t_game *game)
 {
 	//init gmap
-	game->gmap.n_wall_path_texture = ft_strdup("textures/North.xpm");//for testing
-	game->gmap.s_wall_path_texture = ft_strdup("textures/South.xpm");//for testing
-	game->gmap.e_wall_path_texture = ft_strdup("textures/East.xpm");//for testing
-	game->gmap.w_wall_path_texture = ft_strdup("textures/West.xpm");//for testing
+	game->gmap.n_wall_path_texture = ft_strdup("textures/wolfenstein/blue_stone.xpm");//for testing
+	game->gmap.s_wall_path_texture = ft_strdup("textures/wolfenstein/color_stone.xpm");//for testing
+	game->gmap.e_wall_path_texture = ft_strdup("textures/wolfenstein/grey_stone.xpm");//for testing
+	game->gmap.w_wall_path_texture = ft_strdup("textures/wolfenstein/eagle.xpm");//for testing
 	game->gmap.ceiling_color_rgb[0] = 100;//for testing
 	game->gmap.ceiling_color_rgb[1] = 200;//for testing
 	game->gmap.ceiling_color_rgb[2] = 100;//for testing
