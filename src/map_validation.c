@@ -1,18 +1,86 @@
 #include "../include/cub3d.h"
+#include <stdio.h>
 
-int	validate_map(t_data *data)
+void print_gmap(const t_gmap *gmap) {
+	printf("t_gmap struct contents:\n");
+	printf("  n_wall_path_texture: %s\n", gmap->n_wall_path_texture);
+	printf("  s_wall_path_texture: %s\n", gmap->s_wall_path_texture);
+	printf("  w_wall_path_texture: %s\n", gmap->w_wall_path_texture);
+	printf("  e_wall_path_texture: %s\n", gmap->e_wall_path_texture);
+	printf("  floor_color_rgb: [%d, %d, %d]\n", gmap->floor_color_rgb[0], gmap->floor_color_rgb[1], gmap->floor_color_rgb[2]);
+	printf("  ceiling_color_rgb: [%d, %d, %d]\n", gmap->ceiling_color_rgb[0], gmap->ceiling_color_rgb[1], gmap->ceiling_color_rgb[2]);
+	printf("  player_starting_x_pos: %d\n", gmap->player_starting_x_pos);
+	printf("  player_starting_y_pos: %d\n", gmap->player_starting_y_pos);
+	printf("  player_starting_direciton: %c\n", gmap->player_starting_direciton);
+	printf("  map_height: %d\n", gmap->map_height);
+	printf("  map_width: %d\n", gmap->map_width);
+	if (gmap->map_arr) {
+		printf("  map_arr:\n");
+		for (int i = 0; i < gmap->map_height; i++) {
+			printf("    %s\n", gmap->map_arr[i]);
+		}
+	} else {
+		printf("  map_arr: (null)\n");
+	}
+}
+
+int	validate_map(char *path)
 {
-	if (!data->map)
-		return (err_msg(data->mapinfo.path, ERR_MAP_MISSING, FAILURE));
-	if (check_map_sides(&data->mapinfo, data->map->map_tab) == FAILURE)
-		return (err_msg(data->mapinfo.path, ERR_MAP_NO_WALLS, FAILURE));
-	if (data->mapinfo.height < 3)
-		return (err_msg(data->mapinfo.path, ERR_MAP_TOO_SMALL, FAILURE));
-	if (check_map_elements(data, data->map->map_tab) == FAILURE)
-		return (FAILURE);
-	if (check_player_position(data, data->map->map_tab) == FAILURE)
-		return (FAILURE);
-	if (check_map_is_at_the_end(&data->mapinfo) == FAILURE)
-		return (err_msg(data->mapinfo.path, ERR_MAP_LAST, FAILURE));
-	return (SUCCESS);
+	t_mapinfo map_data;
+	t_gmap gmap;
+	int map_start_index;
+	t_player player;
+	int player_x, player_y;
+	char player_dir;
+
+	if (check_file_type(path, 1) == 1)
+	{
+		printf("Error: Map file Type is not valid\n");
+		return 1;
+	}
+
+	if (load_lines_to_memory(path, &map_data))
+	{
+		printf("Error: Could not load lines to memory\n");
+		return 1;
+	}
+
+	map_start_index = find_map_start_index(&map_data);
+
+	int extract_result = extract_header_data(&map_data, &gmap, &map_start_index);
+	if (extract_result) {
+		printf("Error: Failed to extract header data\n");
+		return 1;
+	}
+	if (build_2d_grid(&map_data, &gmap, map_start_index))
+	{
+		printf("Error: Could not build 2D grid\n");
+		return 1;
+	}
+	print_gmap(&gmap);
+	printf("Texture paths:\n");
+	printf("  North: %s\n", gmap.n_wall_path_texture);
+	printf("  South: %s\n", gmap.s_wall_path_texture);
+	printf("  West:  %s\n", gmap.w_wall_path_texture);
+	printf("  East:  %s\n", gmap.e_wall_path_texture);
+	printf("Floor RGB: %d,%d,%d\n", gmap.floor_color_rgb[0], gmap.floor_color_rgb[1], gmap.floor_color_rgb[2]);
+	printf("Ceiling RGB: %d,%d,%d\n", gmap.ceiling_color_rgb[0], gmap.ceiling_color_rgb[1], gmap.ceiling_color_rgb[2]);
+
+	if (check_borders(&gmap, &player_x, &player_y, &player_dir) == 1)
+	{
+		printf("Error: Map borders are not valid\n");
+		return 1;
+	}
+
+	if (check_color_texture(&gmap) == 1)
+	{
+		printf("Error: Map colors or textures are not valid\n");
+		return 1;
+	}
+
+	printf("Player spawn: x=%d, y=%d, dir=%c\n", player_x, player_y, player_dir);
+	init_player_from_spawn(&player, player_y, player_x, player_dir);
+
+	printf("Map file is valid\n");
+	return 0;
 }

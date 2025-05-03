@@ -18,19 +18,27 @@
 # include <errno.h>
 # include <math.h>
 # include <sys/time.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <string.h>
 
-//resolution
+// resolution
 # define SCREEN_H 900
 # define SCREEN_W 1200
-//FOV
+
+// FOV
 # define FOV 1.0471975511965977461542
-//PI used for angles
+
+// PI used for angles
 # define PI 3.14159265358979323846
-//used to change how far the player moves per timestep
+
+// used to change how far the player moves per timestep
 # define SPEED 0.05
-//used to change how far the player turns per timestep
+
+// used to change how far the player turns per timestep
 # define TURN_SPEED 0.05
-//inputs
+
+// inputs
 # define NO_MOVE 0
 # define FORWARD 1
 # define BACKWARD -1
@@ -38,8 +46,18 @@
 # define LEFT -1
 # define RIGHT 1
 
-//map_structure
-//player_starting_direction is N, S, E or W
+typedef struct s_mapinfo
+{
+	int			fd;
+	int			line_count;
+	char		*path;
+	char		**file;
+	int			height;
+	int			width;
+	int			index_end_of_map;
+}	t_mapinfo;
+
+// map_structure
 typedef struct s_gmap
 {
 	char	**map_arr;
@@ -132,19 +150,22 @@ typedef struct s_game
 	t_render	render;
 }	t_game;
 
-//player.c
+// player.c
 void		update_player(int move, int turn, t_player *player, t_gmap *gmap);
 void		update_step_sizes(t_player *player);
 void		init_player(t_gmap *gmap, t_player *player);
 double		normalize_angle(double angle);
-//raycaster.c / raycaster_2.c
+
+// raycaster.c / raycaster_2.c
 void		ray_caster(t_rays *rays, t_gmap *gmap, t_player *player);
 void		calc_wall_face(t_rays *rays);
-//input
+
+// input
 int			key_press(int keycode, void *param);
 int			key_release(int keycode, void *param);
 int			close_window(void *param);
-//render
+
+// render
 void		init_render(t_game *game, t_gmap *gmap, t_render *render);
 void		draw_floor_and_cieling(t_render *render, t_texture *image_buffer);
 int			get_wall_point(t_render *render, t_rays *rays, \
@@ -154,5 +175,18 @@ void		set_cur_wall(t_render *render, t_rays *rays, \
 void		draw_wall(t_render *render, t_texture *image_buffer);
 void		render_loop(t_rays *rays, t_texture *image_buffer, \
 				t_render *render);
+
+
+int			check_file_type(const char *filepath, int expect_cub);
+int			validate_map(char *path);
+
+// Map parsing and validation
+int			load_lines_to_memory(const char *path, t_mapinfo *mapinfo);
+int			extract_header_data(t_mapinfo *mapinfo, t_gmap *gmap, int *map_start_index);
+int			find_map_start_index(t_mapinfo *mapinfo);
+int			build_2d_grid(t_mapinfo *mapinfo, t_gmap *gmap, int map_start_index);
+int			check_color_texture(t_gmap *gmap);
+int			check_borders(t_gmap *gmap, int *player_x, int *player_y, char *player_dir);
+void		init_player_from_spawn(t_player *player, int row, int col, char dir);
 
 #endif
