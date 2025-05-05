@@ -6,7 +6,7 @@
 #    By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/23 20:11:53 by adrgutie          #+#    #+#              #
-#    Updated: 2025/04/30 02:32:39 by adrgutie         ###   ########.fr        #
+#    Updated: 2025/05/05 13:22:24 by adrgutie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,15 @@ SRCS		=	src/main.c \
 				src/player.c \
 				src/renderer.c \
 				src/renderer_2.c \
-				#src/map_validation.c \
-				#src/parse.c 
+				src/map_validation.c \
+				src/build_2d_grid.c \
+				src/check_borders.c \
+				src/check_color_texture.c \
+				src/check_file_type.c \
+				src/extract_header_data.c \
+				src/find_map_start_index.c \
+				src/load_lines_to_memory.c
+
 
 OBJS		=	$(SRCS:src/%.c=$(OBJ_DIR)/%.o)
 

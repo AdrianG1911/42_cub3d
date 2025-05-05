@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/05/03 20:49:39 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/05/05 14:25:08 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,9 +176,8 @@ void		draw_wall(t_render *render, t_texture *image_buffer);
 void		render_loop(t_rays *rays, t_texture *image_buffer, \
 				t_render *render);
 
-
 int			check_file_type(const char *filepath, int expect_cub);
-int			validate_map(char *path);
+t_gmap		validate_map(char *path);
 
 // Map parsing and validation
 int			load_lines_to_memory(const char *path, t_mapinfo *mapinfo);
@@ -187,6 +186,5 @@ int			find_map_start_index(t_mapinfo *mapinfo);
 int			build_2d_grid(t_mapinfo *mapinfo, t_gmap *gmap, int map_start_index);
 int			check_color_texture(t_gmap *gmap);
 int			check_borders(t_gmap *gmap, int *player_x, int *player_y, char *player_dir);
-void		init_player_from_spawn(t_player *player, int row, int col, char dir);
 
 #endif

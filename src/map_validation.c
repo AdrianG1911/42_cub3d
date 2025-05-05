@@ -24,25 +24,24 @@ void print_gmap(const t_gmap *gmap) {
 	}
 }
 
-int	validate_map(char *path)
+t_gmap	validate_map(char *path)
 {
 	t_mapinfo map_data;
 	t_gmap gmap;
 	int map_start_index;
-	t_player player;
 	int player_x, player_y;
 	char player_dir;
 
 	if (check_file_type(path, 1) == 1)
 	{
 		printf("Error: Map file Type is not valid\n");
-		return 1;
+		exit (1);
 	}
 
 	if (load_lines_to_memory(path, &map_data))
 	{
 		printf("Error: Could not load lines to memory\n");
-		return 1;
+		exit (1);
 	}
 
 	map_start_index = find_map_start_index(&map_data);
@@ -50,12 +49,12 @@ int	validate_map(char *path)
 	int extract_result = extract_header_data(&map_data, &gmap, &map_start_index);
 	if (extract_result) {
 		printf("Error: Failed to extract header data\n");
-		return 1;
+		exit (1);
 	}
 	if (build_2d_grid(&map_data, &gmap, map_start_index))
 	{
 		printf("Error: Could not build 2D grid\n");
-		return 1;
+		exit (1);
 	}
 	print_gmap(&gmap);
 	printf("Texture paths:\n");
@@ -69,18 +68,17 @@ int	validate_map(char *path)
 	if (check_borders(&gmap, &player_x, &player_y, &player_dir) == 1)
 	{
 		printf("Error: Map borders are not valid\n");
-		return 1;
+		exit (1);
 	}
 
 	if (check_color_texture(&gmap) == 1)
 	{
 		printf("Error: Map colors or textures are not valid\n");
-		return 1;
+		exit (1);
 	}
 
 	printf("Player spawn: x=%d, y=%d, dir=%c\n", player_x, player_y, player_dir);
-	init_player_from_spawn(&player, player_y, player_x, player_dir);
 
 	printf("Map file is valid\n");
-	return 0;
+	return (gmap);
 }
