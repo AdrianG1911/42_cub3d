@@ -6,34 +6,11 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 23:14:02 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/30 19:56:30 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:58:17 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-void	draw_floor_and_cieling(t_render *render, t_texture *image_buffer)
-{
-	char	*pixel;
-
-	image_buffer->x = 0;
-	while (image_buffer->x < SCREEN_W)
-	{
-		image_buffer->y = 0;
-		while (image_buffer->y < SCREEN_H)
-		{
-			pixel = image_buffer->raw_data + \
-			(image_buffer->y * image_buffer->line_length + image_buffer->x * \
-				(image_buffer->bits_per_pixel / 8));
-			if (image_buffer->y < SCREEN_H / 2)
-				*(unsigned int *)pixel = render->ceiling_color;
-			else
-				*(unsigned int *)pixel = render->floor_color;
-			image_buffer->y++;
-		}
-		image_buffer->x++;
-	}
-}
 
 int	get_wall_point(t_render *render, t_rays *rays, t_texture *image_buffer)
 {

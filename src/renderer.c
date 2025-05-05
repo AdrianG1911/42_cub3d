@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 17:36:13 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/30 18:20:58 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:58:05 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,35 @@ void	init_render(t_game *game, t_gmap *gmap, t_render *render)
 	render->ceiling_color += gmap->ceiling_color_rgb[2];
 }
 
+void	draw_floor_and_cieling_strip(t_render *render, t_texture *image_buffer)
+{
+	int		floor_ceiling_h;
+	int		y;
+	char	*pixel;
+
+	floor_ceiling_h = (SCREEN_H - render->wall_height) / 2;
+	y = 0;
+	while (y < floor_ceiling_h)
+	{
+		pixel = image_buffer->raw_data + \
+		(y * image_buffer->line_length + image_buffer->x * \
+		(image_buffer->bits_per_pixel / 8));
+		*(unsigned int *)pixel = render->ceiling_color;
+		y++;
+	}
+	y += render->wall_height;
+	while (y < SCREEN_H)
+	{
+		pixel = image_buffer->raw_data + \
+		(y * image_buffer->line_length + image_buffer->x * \
+		(image_buffer->bits_per_pixel / 8));
+		*(unsigned int *)pixel = render->floor_color;
+		y++;
+	}
+}
+
 void	render_loop(t_rays *rays, t_texture *image_buffer, t_render *render)
 {
-	draw_floor_and_cieling(render, image_buffer);
 	image_buffer->x = 0;
 	while (image_buffer->x < SCREEN_W)
 	{
@@ -75,6 +101,7 @@ void	render_loop(t_rays *rays, t_texture *image_buffer, t_render *render)
 		render->wall_height &= ~1;
 		render->wall_slice_index = get_wall_point(render, rays, image_buffer);
 		set_cur_wall(render, rays, image_buffer);
+		draw_floor_and_cieling_strip(render, image_buffer);
 		draw_wall(render, image_buffer);
 		image_buffer->x++;
 	}

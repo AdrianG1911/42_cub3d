@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/05/05 14:25:08 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:32:01 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ int			close_window(void *param);
 
 // render
 void		init_render(t_game *game, t_gmap *gmap, t_render *render);
-void		draw_floor_and_cieling(t_render *render, t_texture *image_buffer);
+//void		draw_floor_and_cieling(t_render *render, t_texture *image_buffer);
 int			get_wall_point(t_render *render, t_rays *rays, \
 				t_texture *image_buffer);
 void		set_cur_wall(t_render *render, t_rays *rays, \

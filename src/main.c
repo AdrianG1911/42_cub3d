@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:00:17 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/05/05 13:18:26 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:22:02 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,28 +47,6 @@ int	game_loop(void *param)
 
 void	init_stuff(t_game *game)
 {
-	// game->gmap.n_wall_path_texture = ft_strdup("textures/wolfenstein/blue_stone.xpm");//for testing
-	// game->gmap.s_wall_path_texture = ft_strdup("textures/wolfenstein/color_stone.xpm");//for testing
-	// game->gmap.e_wall_path_texture = ft_strdup("textures/wolfenstein/grey_stone.xpm");//for testing
-	// game->gmap.w_wall_path_texture = ft_strdup("textures/wolfenstein/eagle.xpm");//for testing
-	// game->gmap.ceiling_color_rgb[0] = 100;//for testing
-	// game->gmap.ceiling_color_rgb[1] = 200;//for testing
-	// game->gmap.ceiling_color_rgb[2] = 100;//for testing
-	// game->gmap.floor_color_rgb[0] = 100;//for testing
-	// game->gmap.floor_color_rgb[1] = 50;//for testing
-	// game->gmap.floor_color_rgb[2] = 100;//for testing
-	// game->gmap.player_starting_direciton = 'N';//for testing
-	// game->gmap.player_starting_x_pos = 3;//for testing
-	// game->gmap.player_starting_y_pos = 3;//for testing
-	// game->gmap.map_arr = (char **)ft_calloc(6, sizeof(char *));//for testing
-	// game->gmap.map_height = 6;//for testing
-	// game->gmap.map_width = 6;//for testing
-	// game->gmap.map_arr[0] = ft_strdup("111111");//for testing
-	// game->gmap.map_arr[1] = ft_strdup("101011");//for testing
-	// game->gmap.map_arr[2] = ft_strdup("100001");//for testing
-	// game->gmap.map_arr[3] = ft_strdup("100001");//for testing
-	// game->gmap.map_arr[4] = ft_strdup("101001");//for testing
-	// game->gmap.map_arr[5] = ft_strdup("111111");//for testing
 	init_player(&(game->gmap), &(game->player));
 	init_render(game, &(game->gmap), &(game->render));
 }
