@@ -78,7 +78,9 @@ t_gmap	validate_map(char *path)
 	}
 
 	printf("Player spawn: x=%d, y=%d, dir=%c\n", player_x, player_y, player_dir);
-
 	printf("Map file is valid\n");
+	gmap.player_starting_x_pos = player_x;
+	gmap.player_starting_y_pos = player_y;
+	gmap.player_starting_direciton = player_dir;
 	return (gmap);
 }
