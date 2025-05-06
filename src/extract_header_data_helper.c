@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_header_data_helper.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johankawamura <marvin@42.fr>               +#+  +:+       +#+        */
+/*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/06 10:03:50 by johankawamura     #+#    #+#             */
-/*   Updated: 2024/05/06 10:03:50 by johankawamura    ###   ########.fr       */
+/*   Created: 2024/05/06 10:03:50 by johankawamu       #+#    #+#             */
+/*   Updated: 2025/05/06 11:23:49 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 int	parse_rgb(const char *str, int rgb[3])
 {
-	int	c;
-	int	i;
+	int		c;
+	int		i;
 	char	*end;
 
 	i = 0;
@@ -42,7 +42,8 @@ int	parse_rgb(const char *str, int rgb[3])
 	return (0);
 }
 
-int	extract_texture_path(char *line, char **texture_path, int *found, int offset)
+int	extract_texture_path(char *line, char **texture_path, int *found,
+		int offset)
 {
 	char	*path;
 	char	*end;
@@ -73,5 +74,3 @@ void	init_gmap_colors(t_gmap *gmap)
 		c++;
 	}
 }
-
-int	parse_header_line(char *line, t_gmap *gmap, int *found);

@@ -6,7 +6,7 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 09:49:14 by jidler            #+#    #+#             */
-/*   Updated: 2025/05/06 10:00:44 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/06 11:35:14 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_side_walls(const char *row)
 	int	right;
 
 	left = 0;
-	right = (int)strlen(row) - 1;
+	right = (int)ft_strlen(row) - 1;
 	while (row[left] && (row[left] == ' ' || row[left] == '\t'))
 		left++;
 	while (right >= 0 && (row[right] == ' ' || row[right] == '\t'))
@@ -56,11 +56,12 @@ int	check_side_walls(const char *row)
 		return (1);
 	return (0);
 }
+
 int	get_last_valid_row(t_gmap *gmap)
 {
-	int last_row;
-	int j;
-	int only_whitespace;
+	int	last_row;
+	int	j;
+	int	only_whitespace;
 
 	last_row = gmap->map_height - 1;
 	while (last_row >= 0)

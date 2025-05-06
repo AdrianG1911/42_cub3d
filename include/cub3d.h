@@ -6,7 +6,7 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/05/06 11:18:07 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/06 11:24:32 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,7 @@ int					extract_texture_path(char *line, char **texture_path,
 						int *found, int prefix_len);
 int					parse_rgb(const char *line, int rgb[3]);
 
+int					parse_header_line(char *line, t_gmap *gmap, int *found);
 int					parse_color_line(char *line, t_gmap *gmap);
-
+void				init_gmap_colors(t_gmap *gmap);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:29:22 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/01/03 16:14:17 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:33:53 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 // 	{
 // 		size_t	g = atoi(argv[3]);
 // 		char *dst = argv[1];
-// 		char *dst2 = malloc(strlen(dst) + 1);
+// 		char *dst2 = malloc(ft_strlen(dst) + 1);
 // 		strcpy(dst2, dst);
 // 		const char *src = argv[2];
 // 		printf("return: %s\n", memcpy(dst, src, g));
