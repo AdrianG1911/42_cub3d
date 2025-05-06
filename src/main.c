@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:00:17 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/05/05 20:22:02 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/05/06 10:11:23 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ int	main(int argc, char *argv[])
 	game.gmap = validate_map(argv[1]);
 	game.mlx = mlx_init();
 	if (game.mlx == NULL)
-		err_msg_exit("Error\nmlx fail\n");
+		return (free_game(&game), err_msg_exit("Error\nmlx fail\n"), 1);
 	init_stuff(&game);
 	game.win = mlx_new_window(game.mlx, SCREEN_W, SCREEN_H, "cub3d");
 	if (game.win == NULL)
-		err_msg_exit("Error\nwindow fail\n");
+		return (free_game(&game), err_msg_exit("Error\nwindow fail\n"), 1);
 	mlx_hook(game.win, 17, 0, close_window, (void *)&game);
 	mlx_hook(game.win, 2, 1L << 0, key_press, (void *)&game);
 	mlx_hook(game.win, 3, 1L << 1, key_release, (void *)&game);
