@@ -6,7 +6,7 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 11:10:16 by jidler            #+#    #+#             */
-/*   Updated: 2025/05/06 11:10:42 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/06 11:31:56 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,15 @@ static int	has_cub_extension(const char *filename)
 	len = ft_strlen(filename);
 	if (len < 4)
 		return (0);
-	if (filename[len - 4] == '.' && filename[len - 3] == 'c' && filename[len
-		- 2] == 'u' && filename[len - 1] == 'b')
-		return (1);
-	return (0);
+	if (filename[len - 4] != '.')
+		return (0);
+	if (filename[len - 3] != 'c')
+		return (0);
+	if (filename[len - 2] != 'u')
+		return (0);
+	if (filename[len - 1] != 'b')
+		return (0);
+	return (1);
 }
 
 static int	has_xpm_extension(const char *filename)
@@ -52,10 +57,15 @@ static int	has_xpm_extension(const char *filename)
 	len = ft_strlen(filename);
 	if (len < 4)
 		return (0);
-	if (filename[len - 4] == '.' && filename[len - 3] == 'x' && filename[len
-		- 2] == 'p' && filename[len - 1] == 'm')
-		return (1);
-	return (0);
+	if (filename[len - 4] != '.')
+		return (0);
+	if (filename[len - 3] != 'x')
+		return (0);
+	if (filename[len - 2] != 'p')
+		return (0);
+	if (filename[len - 1] != 'm')
+		return (0);
+	return (1);
 }
 
 int	check_file_type(const char *filepath, int expect_cub)
