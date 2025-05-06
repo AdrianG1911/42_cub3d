@@ -186,7 +186,7 @@ int			find_map_start_index(t_mapinfo *mapinfo);
 int			build_2d_grid(t_mapinfo *mapinfo, t_gmap *gmap, int map_start_index);
 int			check_color_texture(t_gmap *gmap);
 int			check_borders(t_gmap *gmap, int *player_x, int *player_y, char *player_dir);
-
+void	free_lines(char **lines, int count);
 //free
 void		free_game(t_game *game);
 

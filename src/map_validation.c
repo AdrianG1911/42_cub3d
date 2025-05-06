@@ -82,5 +82,7 @@ t_gmap	validate_map(char *path)
 	gmap.player_starting_x_pos = player_x;
 	gmap.player_starting_y_pos = player_y;
 	gmap.player_starting_direciton = player_dir;
+
+	free_lines(map_data.file, map_data.line_count);
 	return (gmap);
 }

@@ -1,53 +1,96 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_lines_to_memory.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: <yourlogin> <yourlogin@student.42.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/07 00:00:00 by <yourlogin>       #+#    #+#             */
+/*   Updated: 2024/06/07 00:00:00 by <yourlogin>      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
-#include <stdio.h>
 
-// Reads all lines from the file at 'path' into mapinfo->file, sets mapinfo->line_count.
-// Returns 0 on success, 1 on error.
-int load_lines_to_memory(const char *path, t_mapinfo *mapinfo)
+void	free_lines(char **lines, int count)
 {
-    FILE *fp;
-    char buffer[4096];
-    int count = 0;
-    int i = 0;
+	int	j;
 
-    // First pass: count lines
-    fp = fopen(path, "r");
-    if (!fp)
-        return (1);
-    while (fgets(buffer, sizeof(buffer), fp))
-        count++;
-    fclose(fp);
-    if (count == 0)
-        return (1);
+	j = 0;
+	while (j < count)
+	{
+		free(lines[j]);
+		j++;
+	}
+	free(lines);
+}
 
-    // Allocate array (+1 for NULL terminator)
-    mapinfo->file = (char **)ft_calloc(count + 1, sizeof(char *));
-    if (!mapinfo->file)
-        return (1);
-    mapinfo->line_count = count;
+static int	count_lines_in_file(const char *path)
+{
+	FILE	*fp;
+	char	buffer[4096];
+	int		count;
 
-    // Second pass: fill array
-    fp = fopen(path, "r");
-    if (!fp)
-        return (1);
-    while (fgets(buffer, sizeof(buffer), fp))
-    {
-        size_t len = ft_strlen(buffer);
-        if (len > 0 && buffer[len - 1] == '\n')
-            buffer[len - 1] = '\0';
-        mapinfo->file[i] = ft_strdup(buffer);
-        if (!mapinfo->file[i])
-        {
-            // Free previously allocated lines
-            for (int j = 0; j < i; j++)
-                free(mapinfo->file[j]);
-            free(mapinfo->file);
-            fclose(fp);
-            return (1);
-        }
-        i++;
-    }
-    mapinfo->file[i] = NULL;
-    fclose(fp);
-    return (0);
+	count = 0;
+	fp = fopen(path, "r");
+	if (!fp)
+		return (-1);
+	while (fgets(buffer, sizeof(buffer), fp))
+		count++;
+	fclose(fp);
+	return (count);
+}
+
+static int	copy_line_to_array(char *buffer, char **lines, int i)
+{
+	size_t	len;
+
+	len = ft_strlen(buffer);
+	if (len > 0 && buffer[len - 1] == '\n')
+		buffer[len - 1] = '\0';
+	lines[i] = ft_strdup(buffer);
+	if (!lines[i])
+		return (1);
+	return (0);
+}
+
+static int	fill_lines_array(const char *path, char **lines, int count)
+{
+	FILE	*fp;
+	char	buffer[4096];
+	int		i;
+
+	i = 0;
+	fp = fopen(path, "r");
+	if (!fp)
+		return (1);
+	while (fgets(buffer, sizeof(buffer), fp))
+	{
+		if (copy_line_to_array(buffer, lines, i))
+		{
+			free_lines(lines, i);
+			fclose(fp);
+			return (1);
+		}
+		i++;
+	}
+	lines[i] = NULL;
+	fclose(fp);
+	return (0);
+}
+
+int	load_lines_to_memory(const char *path, t_mapinfo *mapinfo)
+{
+	int	count;
+
+	count = count_lines_in_file(path);
+	if (count <= 0)
+		return (1);
+	mapinfo->file = (char **)ft_calloc(count + 1, sizeof(char *));
+	if (!mapinfo->file)
+		return (1);
+	mapinfo->line_count = count;
+	if (fill_lines_array(path, mapinfo->file, count))
+		return (1);
+	return (0);
 }
