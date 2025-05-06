@@ -11,72 +11,76 @@
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+#include <fcntl.h>
+#include <unistd.h>
 
-void	free_lines(char **lines, int count)
+
+static int read_file_to_buffer(const char *path, char **out_buffer, ssize_t *out_size)
 {
-	int	j;
-
-	j = 0;
-	while (j < count)
+	int fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return 1;
+	char *buffer = malloc(4096 * 1024); // 4MB max file size
+	if (!buffer)
 	{
-		free(lines[j]);
-		j++;
+		close(fd);
+		return 1;
 	}
-	free(lines);
-}
-
-static int	count_lines_in_file(const char *path)
-{
-	FILE	*fp;
-	char	buffer[4096];
-	int		count;
-
-	count = 0;
-	fp = fopen(path, "r");
-	if (!fp)
-		return (-1);
-	while (fgets(buffer, sizeof(buffer), fp))
-		count++;
-	fclose(fp);
-	return (count);
-}
-
-static int	copy_line_to_array(char *buffer, char **lines, int i)
-{
-	size_t	len;
-
-	len = ft_strlen(buffer);
-	if (len > 0 && buffer[len - 1] == '\n')
-		buffer[len - 1] = '\0';
-	lines[i] = ft_strdup(buffer);
-	if (!lines[i])
-		return (1);
-	return (0);
-}
-
-static int	fill_lines_array(const char *path, char **lines)
-{
-	FILE	*fp;
-	char	buffer[4096];
-	int		i;
-
-	i = 0;
-	fp = fopen(path, "r");
-	if (!fp)
-		return (1);
-	while (fgets(buffer, sizeof(buffer), fp))
+	ssize_t total = 0;
+	ssize_t bytes_read;
+	while ((bytes_read = read(fd, buffer + total, 4096)) > 0)
+		total += bytes_read;
+	close(fd);
+	if (bytes_read < 0)
 	{
-		if (copy_line_to_array(buffer, lines, i))
+		free(buffer);
+		return 1;
+	}
+	*out_buffer = buffer;
+	*out_size = total;
+	return 0;
+}
+
+static int split_buffer_to_lines(char *buffer, ssize_t size, char **lines)
+{
+	ssize_t i = 0, line_start = 0, line_idx = 0;
+	while (i < size)
+	{
+		if (buffer[i] == '\n')
 		{
-			free_lines(lines, i);
-			fclose(fp);
-			return (1);
+			buffer[i] = '\0';
+			if (copy_line_to_array(&buffer[line_start], lines, line_idx))
+			{
+				free_lines(lines, line_idx);
+				return 1;
+			}
+			line_idx++;
+			line_start = i + 1;
 		}
 		i++;
 	}
-	lines[i] = NULL;
-	fclose(fp);
-	return (0);
+	if (line_start < size)
+	{
+		if (copy_line_to_array(&buffer[line_start], lines, line_idx))
+		{
+			free_lines(lines, line_idx);
+			return 1;
+		}
+		line_idx++;
+	}
+	lines[line_idx] = NULL;
+	return 0;
+}
+
+static int fill_lines_array(const char *path, char **lines)
+{
+	char *buffer = NULL;
+	ssize_t size = 0;
+	if (read_file_to_buffer(path, &buffer, &size))
+		return 1;
+	int result = split_buffer_to_lines(buffer, size, lines);
+	free(buffer);
+	return result;
 }
 
 int	load_lines_to_memory(const char *path, t_mapinfo *mapinfo)
