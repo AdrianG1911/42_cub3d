@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 20:25:32 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/04/30 18:45:48 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/05/06 10:13:14 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,11 @@ int	key_press(int keycode, void *param)
 
 	game = (t_game *)param;
 	key = code_to_key(keycode);
-	//printf("Key pressed: %c\n", key);
 	if (key == 'N')
 		return (0);
 	if (key == 'Q')
 	{
-		mlx_destroy_window(game->mlx, game->win);
+		free_game(game);
 		exit(0);
 	}
 	if (key == 'L')
@@ -79,7 +78,7 @@ int	close_window(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	mlx_destroy_window(game->mlx, game->win);
+	free_game(game);
 	exit(0);
 	return (0);
 }

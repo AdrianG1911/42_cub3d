@@ -6,7 +6,7 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/05/06 10:15:12 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/06 11:02:12 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,4 +195,7 @@ int					build_2d_grid(t_mapinfo *mapinfo, t_gmap *gmap,
 int					check_color_texture(t_gmap *gmap);
 int					check_borders(t_gmap *gmap, char *player_dir);
 int					get_last_valid_row(t_gmap *gmap);
+void				free_lines(char **lines, int count);
+// free
+void				free_game(t_game *game);
 #endif

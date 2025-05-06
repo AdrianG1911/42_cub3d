@@ -83,8 +83,6 @@ t_gmap	validate_map(char *path)
 		exit(1);
 	}
 	gmap.player_starting_direciton = player_dir;
-	printf("Player spawn: x=%d, y=%d, dir=%c\n", gmap.player_starting_x_pos,
-		gmap.player_starting_y_pos, player_dir);
-	printf("Map file is valid\n");
+	free_lines(map_data.file, map_data.line_count);
 	return (gmap);
 }
