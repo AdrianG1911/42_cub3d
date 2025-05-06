@@ -6,7 +6,7 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 10:03:50 by johankawamu       #+#    #+#             */
-/*   Updated: 2025/05/06 12:01:47 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/06 12:04:30 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	parse_rgb(const char *str, int rgb[3])
 			i++;
 		if (!str[i] || str[i] == '\n')
 			return (1);
-		rgb[c] = ft_strtol(&str[i], &end, 10);
+		rgb[c] = ft_strtol(&str[i], &end);
 		if (&str[i] == end || rgb[c] < 0 || rgb[c] > 255)
 			return (1);
 		i = (int)(end - str);
