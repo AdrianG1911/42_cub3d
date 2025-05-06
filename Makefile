@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+         #
+#    By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/23 20:11:53 by adrgutie          #+#    #+#              #
-#    Updated: 2025/05/06 11:14:47 by adrgutie         ###   ########.fr        #
+#    Updated: 2025/05/06 11:26:44 by jidler           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRCS		=	src/main.c \
 				src/find_map_start_index.c \
 				src/load_lines_to_memory.c \
 				src/check_border_helper.c \
-				src/free_game.c
+				src/free_game.c \
+				src/extract_header_data_helper.c
 
 
 OBJS		=	$(SRCS:src/%.c=$(OBJ_DIR)/%.o)

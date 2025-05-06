@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   extract_header_data.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 10:03:50 by 42student         #+#    #+#             */
-/*   Updated: 2025/05/06 10:56:44 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:20:50 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-#include "extract_header_data_helper.c"
 #include <ctype.h>
 
-static int	extract_header_loop(t_mapinfo *mapinfo, t_gmap *gmap, int *found, int *i)
+static int	extract_header_loop(t_mapinfo *mapinfo, t_gmap *gmap, int *found,
+		int *i)
 {
 	char	*line;
 
