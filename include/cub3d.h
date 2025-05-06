@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
+/*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/05/06 11:49:29 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/06 14:26:25 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,8 @@ typedef struct s_game
 	t_player		player;
 	int				move_foward_flag;
 	int				move_back_flag;
+	int				move_left_flag;
+	int				move_right_flag;
 	int				turn_left_flag;
 	int				turn_right_flag;
 	t_rays			rays;
@@ -151,8 +153,7 @@ typedef struct s_game
 }					t_game;
 
 // player.c
-void				update_player(int move, int turn, t_player *player,
-						t_gmap *gmap);
+void				update_player(t_game *game, t_player *player, t_gmap *gmap);
 void				update_step_sizes(t_player *player);
 void				init_player(t_gmap *gmap, t_player *player);
 double				normalize_angle(double angle);

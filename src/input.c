@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 20:25:32 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/05/06 11:38:17 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:37:34 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	code_to_key(int keycode)
 {
-	if (keycode == 97)
+	if (keycode == 65361)
 		return ('L');
-	if (keycode == 100)
+	if (keycode == 65363)
 		return ('R');
 	if (keycode == 119)
 		return ('F');
@@ -24,6 +24,10 @@ char	code_to_key(int keycode)
 		return ('B');
 	if (keycode == 65307)
 		return ('Q');
+	if (keycode == 97)
+		return ('A');
+	if (keycode == 100)
+		return ('D');
 	return ('N');
 }
 
@@ -49,6 +53,10 @@ int	key_press(int keycode, void *param)
 		game->move_back_flag = 1;
 	else if (key == 'F')
 		game->move_foward_flag = 1;
+	else if (key == 'A')
+		game->move_left_flag = 1;
+	else if (key == 'D')
+		game->move_right_flag = 1;
 	return (0);
 }
 
@@ -69,6 +77,10 @@ int	key_release(int keycode, void *param)
 		game->move_back_flag = 0;
 	else if (key == 'F')
 		game->move_foward_flag = 0;
+	else if (key == 'A')
+		game->move_left_flag = 0;
+	else if (key == 'D')
+		game->move_right_flag = 0;
 	return (0);
 }
 

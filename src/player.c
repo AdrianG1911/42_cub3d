@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 21:30:55 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/05/06 10:56:50 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:36:34 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,21 @@ double	normalize_angle(double angle)
 	return (angle);
 }
 
-void	update_player(int move, int turn, t_player *player, t_gmap *gmap)
+void	update_player(t_game *game, t_player *player, t_gmap *gmap)
 {
 	double	new_dir;
 	char	cur_tile;
+	int		move;
+	int		turn;
+	int		strafe;
 
+	move = game->move_foward_flag - game->move_back_flag;
+	turn = game->turn_right_flag - game->turn_left_flag;
+	strafe = game->move_right_flag - game->move_left_flag;
 	player->x_pos += player->x_stepsize * move;
 	player->y_pos += player->y_stepsize * move;
+	player->x_pos += -player->y_stepsize * strafe;
+	player->y_pos += player->x_stepsize * strafe;
 	new_dir = player->direction_radians + ((double)turn * TURN_SPEED);
 	if (new_dir != player->direction_radians)
 	{

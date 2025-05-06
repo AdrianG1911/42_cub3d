@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:00:17 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/05/06 10:56:47 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:24:14 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ int	game_loop(void *param)
 
 	time_at_last_frame = get_time_mili();
 	game = (t_game *)param;
-	update_player(game->move_foward_flag - game->move_back_flag, \
-	game->turn_right_flag - game->turn_left_flag, &(game->player), &game->gmap);
+	update_player(game, &(game->player), &game->gmap);
 	ray_caster(&(game->rays), &(game->gmap), &(game->player));
 	render_loop(&game->rays, &game->render.image_buffer, &game->render);
 	mlx_put_image_to_window(game->mlx, game->win, \
