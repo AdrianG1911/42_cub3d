@@ -6,7 +6,7 @@
 #    By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/23 20:11:53 by adrgutie          #+#    #+#              #
-#    Updated: 2025/05/06 10:03:21 by adrgutie         ###   ########.fr        #
+#    Updated: 2025/05/06 10:58:40 by adrgutie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS		=	src/main.c \
 				src/check_color_texture.c \
 				src/check_file_type.c \
 				src/extract_header_data.c \
+				src/extract_header_data_utils.c \
 				src/find_map_start_index.c \
 				src/load_lines_to_memory.c \
 				src/free_game.c

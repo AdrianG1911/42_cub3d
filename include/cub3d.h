@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/05/06 10:03:50 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/05/06 10:56:38 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,8 @@ int			find_map_start_index(t_mapinfo *mapinfo);
 int			build_2d_grid(t_mapinfo *mapinfo, t_gmap *gmap, int map_start_index);
 int			check_color_texture(t_gmap *gmap);
 int			check_borders(t_gmap *gmap, int *player_x, int *player_y, char *player_dir);
-void	free_lines(char **lines, int count);
+void		free_lines(char **lines, int count);
+int			parse_header_line(char *line, t_gmap *gmap, int *found);
 //free
 void		free_game(t_game *game);
 
