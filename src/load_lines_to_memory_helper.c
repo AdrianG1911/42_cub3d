@@ -17,12 +17,13 @@ void	free_lines(char **lines, int count)
 
 int	count_lines_in_file(const char *path)
 {
-	int fd;
-	char buffer[4096];
-	ssize_t bytes_read;
-	int count = 0;
-	int i;
+	int		fd;
+	char	buffer[4096];
+	ssize_t	bytes_read;
+	int		count;
+	int		i;
 
+	count = 0;
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (-1);
