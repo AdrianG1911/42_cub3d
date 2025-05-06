@@ -6,7 +6,7 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/05/06 11:03:04 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/06 11:07:08 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,4 +198,11 @@ int					get_last_valid_row(t_gmap *gmap);
 void				free_lines(char **lines, int count);
 // free
 void				free_game(t_game *game);
+
+int					extract_texture_path(char *line, char **texture_path,
+						int *found, int prefix_len);
+int					parse_rgb(char *line, int rgb[3]);
+
+int					parse_color_line(char *line, t_gmap *gmap);
+
 #endif
