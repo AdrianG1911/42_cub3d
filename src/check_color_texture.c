@@ -6,7 +6,7 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 10:04:39 by jidler            #+#    #+#             */
-/*   Updated: 2025/05/06 11:53:21 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/06 11:56:04 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ static int	try_open_texture_path(const char *path)
 	}
 	if (ft_strncmp(path, "textures/", 9) == 0)
 	{
-		if (snprintf(alt_path, MAX_PATH_LEN, "../%s", path) >= MAX_PATH_LEN)
+		if (ft_strlen(path) + 3 >= MAX_PATH_LEN)
 			return (1);
+		ft_strlcpy(alt_path, "../", MAX_PATH_LEN);
+		ft_strlcat(alt_path, path, MAX_PATH_LEN);
 		fd = open(alt_path, O_RDONLY);
 		if (fd < 0)
 			return (1);

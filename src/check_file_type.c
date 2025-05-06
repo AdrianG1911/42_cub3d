@@ -6,7 +6,7 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 11:10:16 by jidler            #+#    #+#             */
-/*   Updated: 2025/05/06 11:34:00 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/06 11:54:50 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	check_file_type(const char *filepath, int expect_cub)
 
 	if (is_directory(filepath))
 	{
-		fprintf(stderr, "%s: is a directory\n", filepath);
+		printf("%s: is a directory\n", filepath);
 		return (1);
 	}
 	fd = open(filepath, O_RDONLY);
@@ -86,12 +86,12 @@ int	check_file_type(const char *filepath, int expect_cub)
 	close(fd);
 	if (expect_cub && !has_cub_extension(filepath))
 	{
-		fprintf(stderr, "%s: expected a .cub file\n", filepath);
+		printf("%s: expected a .cub file\n", filepath);
 		return (1);
 	}
 	if (!expect_cub && !has_xpm_extension(filepath))
 	{
-		fprintf(stderr, "%s: expected a .xpm file\n", filepath);
+		printf("%s: expected a .xpm file\n", filepath);
 		return (1);
 	}
 	return (0);
