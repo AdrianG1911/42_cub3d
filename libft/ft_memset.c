@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:16:41 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/01/03 16:14:17 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:33:59 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*ft_memset(void *b, int c, size_t len)
 // 	{
 // 		size_t	g = atoi(argv[3]);
 // 		char *dst = argv[1];
-// 		char *dst2 = malloc(strlen(dst) + 1);
+// 		char *dst2 = malloc(ft_strlen(dst) + 1);
 // 		strcpy(dst2, dst);
 // 		const char src = argv[2][0];
 // 		printf("return: %s\n", memset(dst, src, g));

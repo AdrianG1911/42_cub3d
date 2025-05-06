@@ -6,7 +6,7 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 09:49:14 by jidler            #+#    #+#             */
-/*   Updated: 2025/05/06 11:29:57 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/06 11:35:14 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_side_walls(const char *row)
 	int	right;
 
 	left = 0;
-	right = (int)strlen(row) - 1;
+	right = (int)ft_strlen(row) - 1;
 	while (row[left] && (row[left] == ' ' || row[left] == '\t'))
 		left++;
 	while (right >= 0 && (row[right] == ' ' || row[right] == '\t'))
