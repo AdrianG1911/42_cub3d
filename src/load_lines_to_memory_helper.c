@@ -1,6 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_lines_to_memory_helper.c                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/06 11:49:05 by jidler            #+#    #+#             */
+/*   Updated: 2025/05/06 11:51:43 by jidler           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 #include <fcntl.h>
 #include <unistd.h>
+
+int	split_line_segment(char *buffer, char **lines, ssize_t *line_idx,
+		ssize_t line_start)
+{
+	if (copy_line_to_array(&buffer[line_start], lines, *line_idx))
+	{
+		free_lines(lines, *line_idx);
+		return (1);
+	}
+	(*line_idx)++;
+	return (0);
+}
 
 void	free_lines(char **lines, int count)
 {
@@ -27,8 +51,11 @@ int	count_lines_in_file(const char *path)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (-1);
-	while ((bytes_read = read(fd, buffer, sizeof(buffer))) > 0)
+	while (1)
 	{
+		bytes_read = read(fd, buffer, sizeof(buffer));
+		if (bytes_read <= 0)
+			break ;
 		i = 0;
 		while (i < bytes_read)
 		{

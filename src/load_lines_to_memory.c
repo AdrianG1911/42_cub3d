@@ -6,7 +6,7 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 00:00:00 by <yourlogin>       #+#    #+#             */
-/*   Updated: 2025/05/06 11:45:37 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/06 11:52:10 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,23 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-static int	read_file_to_buffer(const char *path, char **out_buffer,
-		ssize_t *out_size)
+static int	read_fd_to_buffer(int fd, char **out_buffer, ssize_t *out_size)
 {
-	int		fd;
+	char	*buffer;
 	ssize_t	total;
 	ssize_t	bytes_read;
 
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (1);
-	char *buffer = malloc(4096 * 1024); // 4MB max file size
+	buffer = malloc(4096 * 1024);
 	if (!buffer)
-	{
-		close(fd);
 		return (1);
-	}
 	total = 0;
-	while ((bytes_read = read(fd, buffer + total, 4096)) > 0)
+	while (1)
+	{
+		bytes_read = read(fd, buffer + total, 4096);
+		if (bytes_read <= 0)
+			break ;
 		total += bytes_read;
-	close(fd);
+	}
 	if (bytes_read < 0)
 	{
 		free(buffer);
@@ -44,34 +41,44 @@ static int	read_file_to_buffer(const char *path, char **out_buffer,
 	return (0);
 }
 
+static int	read_file_to_buffer(const char *path, char **out_buffer,
+		ssize_t *out_size)
+{
+	int	fd;
+	int	result;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (1);
+	result = read_fd_to_buffer(fd, out_buffer, out_size);
+	close(fd);
+	return (result);
+}
+
 static int	split_buffer_to_lines(char *buffer, ssize_t size, char **lines)
 {
-	ssize_t	i = 0, line_start = 0, line_idx;
+	ssize_t	i;
+	ssize_t	line_start;
+	ssize_t	line_idx;
 
-	i = 0, line_start = 0, line_idx = 0;
+	i = 0;
+	line_start = 0;
+	line_idx = 0;
 	while (i < size)
 	{
 		if (buffer[i] == '\n')
 		{
 			buffer[i] = '\0';
-			if (copy_line_to_array(&buffer[line_start], lines, line_idx))
-			{
-				free_lines(lines, line_idx);
+			if (split_line_segment(buffer, lines, &line_idx, line_start))
 				return (1);
-			}
-			line_idx++;
 			line_start = i + 1;
 		}
 		i++;
 	}
 	if (line_start < size)
 	{
-		if (copy_line_to_array(&buffer[line_start], lines, line_idx))
-		{
-			free_lines(lines, line_idx);
+		if (split_line_segment(buffer, lines, &line_idx, line_start))
 			return (1);
-		}
-		line_idx++;
 	}
 	lines[line_idx] = NULL;
 	return (0);

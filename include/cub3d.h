@@ -6,7 +6,7 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/05/06 11:46:11 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/06 11:49:29 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,4 +208,8 @@ int					parse_header_line(char *line, t_gmap *gmap, int *found);
 int					parse_color_line(char *line, t_gmap *gmap);
 void				init_gmap_colors(t_gmap *gmap);
 int					copy_line_to_array(char *buffer, char **lines, int i);
+
+int					split_line_segment(char *buffer, char **lines,
+						ssize_t *line_idx, ssize_t line_start);
+
 #endif
