@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_game.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/06 10:25:11 by adrgutie          #+#    #+#             */
+/*   Updated: 2025/05/06 10:46:20 by adrgutie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 void	free_gmap(t_gmap *gmap)
@@ -41,4 +53,7 @@ void	free_game(t_game *game)
 	free_gmap(&game->gmap);
 	if (game->mlx != NULL && game->win != NULL)
 		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx != NULL)
+		mlx_destroy_display(game->mlx);
+	free(game->mlx);
 }
