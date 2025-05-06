@@ -6,7 +6,7 @@
 /*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 20:25:32 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/05/06 10:56:46 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:37:34 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	key_release(int keycode, void *param)
 
 	game = (t_game *)param;
 	key = code_to_key(keycode);
-	//printf("Key released: %c\n", key);
 	if (key == 'N')
 		return (0);
 	if (key == 'L')
