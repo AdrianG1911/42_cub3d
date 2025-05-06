@@ -1,18 +1,18 @@
 #include "../include/cub3d.h"
-#include <stdio.h>
-#include <string.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 
 /*
 **  Validates that the input is not a directory and has the correct file extension
 */
 
-static int is_directory(const char *path)
+static int	is_directory(const char *path)
 {
-	int descriptor;
-	int result;
+	int	descriptor;
+	int	result;
 
 	result = 0;
 	descriptor = open(path, O_DIRECTORY);
@@ -24,37 +24,35 @@ static int is_directory(const char *path)
 	return (result);
 }
 
-static int has_cub_extension(const char *filename)
+static int	has_cub_extension(const char *filename)
 {
-	size_t len = ft_strlen(filename);
+	size_t	len;
 
+	len = ft_strlen(filename);
 	if (len < 4)
 		return (0);
-	if (filename[len - 4] == '.' &&
-		filename[len - 3] == 'c' &&
-		filename[len - 2] == 'u' &&
-		filename[len - 1] == 'b')
+	if (filename[len - 4] == '.' && filename[len - 3] == 'c' && filename[len
+		- 2] == 'u' && filename[len - 1] == 'b')
 		return (1);
 	return (0);
 }
 
-static int has_xpm_extension(const char *filename)
+static int	has_xpm_extension(const char *filename)
 {
-	size_t len = ft_strlen(filename);
+	size_t	len;
 
+	len = ft_strlen(filename);
 	if (len < 4)
 		return (0);
-	if (filename[len - 4] == '.' &&
-		filename[len - 3] == 'x' &&
-		filename[len - 2] == 'p' &&
-		filename[len - 1] == 'm')
+	if (filename[len - 4] == '.' && filename[len - 3] == 'x' && filename[len
+		- 2] == 'p' && filename[len - 1] == 'm')
 		return (1);
 	return (0);
 }
 
-int check_file_type(const char *filepath, int expect_cub)
+int	check_file_type(const char *filepath, int expect_cub)
 {
-	int fd;
+	int	fd;
 
 	if (is_directory(filepath))
 	{
