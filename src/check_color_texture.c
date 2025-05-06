@@ -6,7 +6,7 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 10:04:39 by jidler            #+#    #+#             */
-/*   Updated: 2025/05/06 11:44:08 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/06 11:53:21 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	check_texture_extension(const char *path)
 	if (!path || *path == '\0')
 		return (1);
 	len = ft_strlen(path);
-	if (len < 4 || strcmp(path + len - 4, ".xpm") != 0)
+	if (len < 4 || ft_strncmp(path + len - 4, ".xpm", 4) != 0)
 		return (1);
 	return (0);
 }
