@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_header_data_utils.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johankawamura <marvin@42.fr>               +#+  +:+       +#+        */
+/*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/06 10:03:50 by johankawamura     #+#    #+#             */
-/*   Updated: 2024/05/06 10:03:50 by johankawamura    ###   ########.fr       */
+/*   Created: 2024/05/06 10:03:50 by johankawamu       #+#    #+#             */
+/*   Updated: 2025/05/06 10:56:43 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

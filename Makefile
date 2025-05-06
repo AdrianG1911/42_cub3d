@@ -6,7 +6,11 @@
 #    By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/23 20:11:53 by adrgutie          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2025/05/06 11:00:15 by jidler           ###   ########.fr        #
+=======
+#    Updated: 2025/05/06 10:58:40 by adrgutie         ###   ########.fr        #
+>>>>>>> f2814aaf7600906ac30d14ea3661146a2d029b06
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +35,7 @@ SRCS		=	src/main.c \
 				src/check_color_texture.c \
 				src/check_file_type.c \
 				src/extract_header_data.c \
+				src/extract_header_data_utils.c \
 				src/find_map_start_index.c \
 				src/load_lines_to_memory.c \
 				src/check_border_helper.c \
