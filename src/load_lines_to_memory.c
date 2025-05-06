@@ -54,7 +54,7 @@ static int	copy_line_to_array(char *buffer, char **lines, int i)
 	return (0);
 }
 
-static int	fill_lines_array(const char *path, char **lines, int count)
+static int	fill_lines_array(const char *path, char **lines)
 {
 	FILE	*fp;
 	char	buffer[4096];
@@ -90,7 +90,7 @@ int	load_lines_to_memory(const char *path, t_mapinfo *mapinfo)
 	if (!mapinfo->file)
 		return (1);
 	mapinfo->line_count = count;
-	if (fill_lines_array(path, mapinfo->file, count))
+	if (fill_lines_array(path, mapinfo->file))
 		return (1);
 	return (0);
 }
