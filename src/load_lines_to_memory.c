@@ -15,39 +15,41 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static int	process_newline_segments(char *buffer, ssize_t size, char **lines,
-		int count, ssize_t *line_idx)
+static int	process_newline_segments(char *buffer, ssize_t size, char **lines, int count)
 {
-	ssize_t	i;
-	ssize_t	line_start;
+	ssize_t i;
+	ssize_t line_start;
+	ssize_t line_idx;
 
 	i = 0;
 	line_start = 0;
+	line_idx = 0;
 	while (i < size)
 	{
 		if (buffer[i] == '\n')
 		{
 			buffer[i] = '\0';
-			if (*line_idx >= count)
-				return (1);
-			if (split_line_segment(&buffer[line_start], lines, line_idx, count))
-				return (1);
+			if (line_idx >= count)
+				return (-1);
+			if (split_line_segment(&buffer[line_start], lines, &line_idx, count))
+				return (-1);
 			line_start = i + 1;
 		}
 		i++;
 	}
-	return (line_start);
+	return (int)line_start | ((int)line_idx << 16);
 }
 
 static int	split_buffer_to_lines(char *buffer, ssize_t size, char **lines,
 		int count)
 {
-	ssize_t	line_idx;
-	ssize_t	line_start;
+	ssize_t line_idx;
+	ssize_t line_start;
+	int packed;
 
-	line_idx = 0;
-	line_start = process_newline_segments(buffer, size, lines, count,
-			&line_idx);
+	packed = process_newline_segments(buffer, size, lines, count);
+	line_start = (ssize_t)(packed & 0xFFFF);
+	line_idx = (ssize_t)((packed >> 16) & 0xFFFF);
 	if (line_start < size)
 	{
 		if (line_idx >= count)
