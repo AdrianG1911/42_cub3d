@@ -55,7 +55,7 @@ static int	read_file_to_buffer(const char *path, char **out_buffer,
 	return (result);
 }
 
-static int	split_buffer_to_lines(char *buffer, ssize_t size, char **lines)
+static int	split_buffer_to_lines(char *buffer, ssize_t size, char **lines, int count)
 {
 	ssize_t	i;
 	ssize_t	line_start;

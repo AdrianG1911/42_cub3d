@@ -15,8 +15,12 @@
 #include <unistd.h>
 
 int	split_line_segment(char *buffer, char **lines, ssize_t *line_idx,
-		size_t line_start)
+		size_t line_start, int count)
 {
+	if (*line_idx >= count) {
+		printf("[DEBUG] split_line_segment: line_idx %zd >= count %d, aborting to prevent overrun\n", *line_idx, count);
+		return (1);
+	}
 	if (copy_line_to_array(&buffer[line_start], lines, *line_idx))
 	{
 		free_lines(lines, *line_idx);
