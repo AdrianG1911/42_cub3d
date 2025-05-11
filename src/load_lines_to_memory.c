@@ -69,7 +69,11 @@ static int	split_buffer_to_lines(char *buffer, ssize_t size, char **lines, int c
 		if (buffer[i] == '\n')
 		{
 			buffer[i] = '\0';
-			if (split_line_segment(buffer, lines, &line_idx, line_start))
+			if (line_idx >= count) {
+				printf("[DEBUG] split_buffer_to_lines: line_idx %zd >= count %d, aborting to prevent overrun\n", line_idx, count);
+				return (1);
+			}
+			if (split_line_segment(buffer, lines, &line_idx, line_start, count))
 				return (1);
 			line_start = i + 1;
 		}
@@ -77,14 +81,19 @@ static int	split_buffer_to_lines(char *buffer, ssize_t size, char **lines, int c
 	}
 	if (line_start < size)
 	{
-		if (split_line_segment(buffer, lines, &line_idx, line_start))
+		if (line_idx >= count) {
+			printf("[DEBUG] split_buffer_to_lines: line_idx %zd >= count %d at end, aborting to prevent overrun\n", line_idx, count);
+			return (1);
+		}
+		if (split_line_segment(buffer, lines, &line_idx, line_start, count))
 			return (1);
 	}
-	lines[line_idx] = NULL;
+	if (line_idx < count)
+		lines[line_idx] = NULL;
 	return (0);
 }
 
-static int	fill_lines_array(const char *path, char **lines)
+static int	fill_lines_array(const char *path, char **lines, int count)
 {
 	char	*buffer;
 	ssize_t	size;
@@ -94,7 +103,7 @@ static int	fill_lines_array(const char *path, char **lines)
 	size = 0;
 	if (read_file_to_buffer(path, &buffer, &size))
 		return (1);
-	result = split_buffer_to_lines(buffer, size, lines);
+	result = split_buffer_to_lines(buffer, size, lines, count);
 	free(buffer);
 	return (result);
 }
@@ -110,7 +119,7 @@ int	load_lines_to_memory(const char *path, t_mapinfo *mapinfo)
 	if (!mapinfo->file)
 		return (1);
 	mapinfo->line_count = count;
-	if (fill_lines_array(path, mapinfo->file))
+	if (fill_lines_array(path, mapinfo->file, count))
 	{
 		free_lines(mapinfo->file, mapinfo->line_count);
 		mapinfo->file = NULL;
