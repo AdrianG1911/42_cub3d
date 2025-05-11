@@ -15,29 +15,33 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-static int	split_buffer_to_lines(char *buffer, ssize_t size, char **lines,
-		int count)
+static int	process_newline_segments(char *buffer, ssize_t size, char **lines, int count, ssize_t *line_idx)
 {
-	ssize_t	i;
-	ssize_t	line_start;
-	ssize_t	line_idx;
-
-	i = 0;
-	line_start = 0;
-	line_idx = 0;
+	ssize_t i = 0;
+	ssize_t line_start = 0;
 	while (i < size)
 	{
 		if (buffer[i] == '\n')
 		{
 			buffer[i] = '\0';
-			if (line_idx >= count)
+			if (*line_idx >= count)
 				return (1);
-			if (split_line_segment(buffer, lines, &line_idx, line_start, count))
+			if (split_line_segment(buffer, lines, line_idx, line_start, count))
 				return (1);
 			line_start = i + 1;
 		}
 		i++;
 	}
+	return line_start;
+}
+
+static int	split_buffer_to_lines(char *buffer, ssize_t size, char **lines,
+		int count)
+{
+	ssize_t line_idx = 0;
+	ssize_t line_start;
+
+	line_start = process_newline_segments(buffer, size, lines, count, &line_idx);
 	if (line_start < size)
 	{
 		if (line_idx >= count)
