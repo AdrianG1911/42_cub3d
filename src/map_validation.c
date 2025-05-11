@@ -78,9 +78,7 @@ t_gmap	validate_map(char *path)
 	if (validate_header(&map_data, &gmap, &map_start_index))
 	{
 		if (map_data.file) {
-			printf("[DEBUG] About to free_lines in validate_header error\n");
 			free_lines(map_data.file, map_data.line_count);
-			printf("[DEBUG] Finished free_lines in validate_header error\n");
 		}
 		map_data.file = NULL;
 		exit(1);
@@ -89,17 +87,13 @@ t_gmap	validate_map(char *path)
 			&player_dir))
 	{
 		if (map_data.file) {
-			printf("[DEBUG] About to free_lines in validate_grid_and_borders error\n");
 			free_lines(map_data.file, map_data.line_count);
-			printf("[DEBUG] Finished free_lines in validate_grid_and_borders error\n");
 		}
 		map_data.file = NULL;
 		exit(1);
 	}
 	gmap.player_starting_direciton = player_dir;
-	printf("[DEBUG] About to free_lines at end of validate_map\n");
 	free_lines(map_data.file, map_data.line_count);
-	printf("[DEBUG] Finished free_lines at end of validate_map\n");
 	map_data.file = NULL;
 	return (gmap);
 }

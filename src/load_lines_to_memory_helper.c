@@ -39,23 +39,15 @@ void	free_lines(char **lines, int count)
 {
 	int	j;
 
-	if (!lines) {
-		printf("[DEBUG] free_lines called with NULL lines pointer\n");
+	if (!lines)
 		return;
-	}
-	printf("[DEBUG] free_lines called with count=%d, lines=%p\n", count, (void*)lines);
 	j = 0;
 	while (j < count)
 	{
-		if (lines[j]) {
-			printf("[DEBUG]   freeing lines[%d]=%p\n", j, (void*)lines[j]);
+		if (lines[j])
 			free(lines[j]);
-		} else {
-			printf("[DEBUG]   lines[%d] is NULL\n", j);
-		}
 		j++;
 	}
-	printf("[DEBUG] freeing lines array %p\n", (void*)lines);
 	free(lines);
 }
 

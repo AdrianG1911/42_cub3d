@@ -70,7 +70,6 @@ static int	split_buffer_to_lines(char *buffer, ssize_t size, char **lines, int c
 		{
 			buffer[i] = '\0';
 			if (line_idx >= count) {
-				printf("[DEBUG] split_buffer_to_lines: line_idx %zd >= count %d, aborting to prevent overrun\n", line_idx, count);
 				return (1);
 			}
 			if (split_line_segment(buffer, lines, &line_idx, line_start, count))
@@ -82,7 +81,6 @@ static int	split_buffer_to_lines(char *buffer, ssize_t size, char **lines, int c
 	if (line_start < size)
 	{
 		if (line_idx >= count) {
-			printf("[DEBUG] split_buffer_to_lines: line_idx %zd >= count %d at end, aborting to prevent overrun\n", line_idx, count);
 			return (1);
 		}
 		if (split_line_segment(buffer, lines, &line_idx, line_start, count))
