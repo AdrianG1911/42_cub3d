@@ -6,19 +6,23 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 00:00:00 by <yourlogin>       #+#    #+#             */
-/*   Updated: 2025/05/11 13:21:37 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/11 13:37:12 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include <fcntl.h>
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-static int	process_newline_segments(char *buffer, ssize_t size, char **lines, int count, ssize_t *line_idx)
+static int	process_newline_segments(char *buffer, ssize_t size, char **lines,
+		int count, ssize_t *line_idx)
 {
-	ssize_t i = 0;
-	ssize_t line_start = 0;
+	ssize_t	i;
+	ssize_t	line_start;
+
+	i = 0;
+	line_start = 0;
 	while (i < size)
 	{
 		if (buffer[i] == '\n')
@@ -32,16 +36,18 @@ static int	process_newline_segments(char *buffer, ssize_t size, char **lines, in
 		}
 		i++;
 	}
-	return line_start;
+	return (line_start);
 }
 
 static int	split_buffer_to_lines(char *buffer, ssize_t size, char **lines,
 		int count)
 {
-	ssize_t line_idx = 0;
-	ssize_t line_start;
+	ssize_t	line_idx;
+	ssize_t	line_start;
 
-	line_start = process_newline_segments(buffer, size, lines, count, &line_idx);
+	line_idx = 0;
+	line_start = process_newline_segments(buffer, size, lines, count,
+			&line_idx);
 	if (line_start < size)
 	{
 		if (line_idx >= count)
