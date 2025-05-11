@@ -68,8 +68,8 @@ static int	validate_grid_and_borders(const t_mapinfo *map_data, t_gmap *gmap,
 
 t_gmap	validate_map(char *path)
 {
-	t_mapinfo	map_data;
-	t_gmap		gmap;
+	t_gmap		gmap = {0};
+	t_mapinfo	map_data = {0};
 	int			map_start_index;
 	char		player_dir;
 
@@ -77,13 +77,15 @@ t_gmap	validate_map(char *path)
 		exit(1);
 	if (validate_header(&map_data, &gmap, &map_start_index))
 	{
-		free_lines(map_data.file, map_data.line_count);
+		if (map_data.file)
+			free_lines(map_data.file, map_data.line_count);
 		exit(1);
 	}
 	if (validate_grid_and_borders(&map_data, &gmap, map_start_index,
 			&player_dir))
 	{
-		free_lines(map_data.file, map_data.line_count);
+		if (map_data.file)
+			free_lines(map_data.file, map_data.line_count);
 		exit(1);
 	}
 	gmap.player_starting_direciton = player_dir;

@@ -25,10 +25,14 @@ void	free_gmap(t_gmap *gmap)
 		y++;
 	}
 	free(gmap->map_arr);
-	free(gmap->e_wall_path_texture);
-	free(gmap->n_wall_path_texture);
-	free(gmap->s_wall_path_texture);
-	free(gmap->w_wall_path_texture);
+	if (gmap->e_wall_path_texture)
+		free(gmap->e_wall_path_texture);
+	if (gmap->n_wall_path_texture)
+		free(gmap->n_wall_path_texture);
+	if (gmap->s_wall_path_texture)
+		free(gmap->s_wall_path_texture);
+	if (gmap->w_wall_path_texture)
+		free(gmap->w_wall_path_texture);
 }
 
 void	free_game(t_game *game)

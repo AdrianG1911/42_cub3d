@@ -30,10 +30,13 @@ void	free_lines(char **lines, int count)
 {
 	int	j;
 
+	if (!lines)
+		return;
 	j = 0;
 	while (j < count)
 	{
-		free(lines[j]);
+		if (lines[j])
+			free(lines[j]);
 		j++;
 	}
 	free(lines);
