@@ -6,7 +6,7 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 11:49:05 by jidler            #+#    #+#             */
-/*   Updated: 2025/05/06 11:51:43 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/11 13:21:54 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@
 int	split_line_segment(char *buffer, char **lines, ssize_t *line_idx,
 		size_t line_start, int count)
 {
+	ssize_t	i;
+
 	if (*line_idx >= count)
 	{
-		printf("[DEBUG] split_line_segment: line_idx %zd >= count %d, aborting to prevent overrun\n", *line_idx, count);
 		return (1);
 	}
 	if (copy_line_to_array(&buffer[line_start], lines, *line_idx))
 	{
 		free_lines(lines, *line_idx);
 		{
-			ssize_t i;
 			i = *line_idx;
 			while (lines[i])
 			{
@@ -45,7 +45,7 @@ void	free_lines(char **lines, int count)
 	int	j;
 
 	if (!lines)
-		return;
+		return ;
 	j = 0;
 	while (j < count)
 	{
@@ -58,11 +58,11 @@ void	free_lines(char **lines, int count)
 
 int	count_lines_in_file(const char *path)
 {
-	int	fd;
+	int		fd;
 	char	buffer[4096];
 	ssize_t	bytes_read;
-	int	count;
-	int	i;
+	int		count;
+	int		i;
 
 	count = 0;
 	fd = open(path, O_RDONLY);
