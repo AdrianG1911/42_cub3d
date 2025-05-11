@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtol.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
+/*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:02:03 by jidler            #+#    #+#             */
-/*   Updated: 2025/05/06 12:02:59 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/11 13:25:49 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,13 @@ long	ft_strtol(const char *str, char **endptr)
 	sign = 1;
 	i = 0;
 	sign = parse_sign(str, &i);
-	// Get sign and move the index past whitespace/sign
 	if (str[i] < '0' || str[i] > '9')
 	{
 		if (endptr)
 			*endptr = (char *)str;
 		return (0);
 	}
-	result = parse_digits(str, &i); // Parse digits
+	result = parse_digits(str, &i);
 	if (endptr)
 		*endptr = (char *)(str + i);
 	return (result * sign);
