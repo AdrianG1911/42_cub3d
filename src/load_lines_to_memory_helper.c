@@ -17,17 +17,22 @@
 int	split_line_segment(char *buffer, char **lines, ssize_t *line_idx,
 		size_t line_start, int count)
 {
-	if (*line_idx >= count) {
+	if (*line_idx >= count)
+	{
 		printf("[DEBUG] split_line_segment: line_idx %zd >= count %d, aborting to prevent overrun\n", *line_idx, count);
 		return (1);
 	}
 	if (copy_line_to_array(&buffer[line_start], lines, *line_idx))
 	{
 		free_lines(lines, *line_idx);
-		ssize_t i = *line_idx;
-		while (lines[i]) {
-			lines[i] = NULL;
-			i++;
+		{
+			ssize_t i;
+			i = *line_idx;
+			while (lines[i])
+			{
+				lines[i] = NULL;
+				i++;
+			}
 		}
 		return (1);
 	}
@@ -53,11 +58,11 @@ void	free_lines(char **lines, int count)
 
 int	count_lines_in_file(const char *path)
 {
-	int		fd;
+	int	fd;
 	char	buffer[4096];
 	ssize_t	bytes_read;
-	int		count;
-	int		i;
+	int	count;
+	int	i;
 
 	count = 0;
 	fd = open(path, O_RDONLY);
