@@ -111,6 +111,10 @@ int	load_lines_to_memory(const char *path, t_mapinfo *mapinfo)
 		return (1);
 	mapinfo->line_count = count;
 	if (fill_lines_array(path, mapinfo->file))
+	{
+		free_lines(mapinfo->file, mapinfo->line_count);
+		mapinfo->file = NULL;
 		return (1);
+	}
 	return (0);
 }

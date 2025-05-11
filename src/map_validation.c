@@ -79,6 +79,7 @@ t_gmap	validate_map(char *path)
 	{
 		if (map_data.file)
 			free_lines(map_data.file, map_data.line_count);
+		map_data.file = NULL;
 		exit(1);
 	}
 	if (validate_grid_and_borders(&map_data, &gmap, map_start_index,
@@ -86,9 +87,11 @@ t_gmap	validate_map(char *path)
 	{
 		if (map_data.file)
 			free_lines(map_data.file, map_data.line_count);
+		map_data.file = NULL;
 		exit(1);
 	}
 	gmap.player_starting_direciton = player_dir;
 	free_lines(map_data.file, map_data.line_count);
+	map_data.file = NULL;
 	return (gmap);
 }
