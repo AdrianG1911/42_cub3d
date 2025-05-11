@@ -14,8 +14,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-int	split_line_segment(char *buffer, char **lines, ssize_t *line_idx,
-		size_t line_start, int count)
+int	split_line_segment(char *buffer, char **lines, ssize_t *line_idx, int count)
 {
 	ssize_t	i;
 
@@ -23,7 +22,7 @@ int	split_line_segment(char *buffer, char **lines, ssize_t *line_idx,
 	{
 		return (1);
 	}
-	if (copy_line_to_array(&buffer[line_start], lines, *line_idx))
+	if (copy_line_to_array(buffer, lines, *line_idx))
 	{
 		free_lines(lines, *line_idx);
 		{

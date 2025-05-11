@@ -26,7 +26,7 @@ static int	process_newline_segments(char *buffer, ssize_t size, char **lines, in
 			buffer[i] = '\0';
 			if (*line_idx >= count)
 				return (1);
-			if (split_line_segment(buffer, lines, line_idx, line_start, count))
+			if (split_line_segment(&buffer[line_start], lines, line_idx, count))
 				return (1);
 			line_start = i + 1;
 		}
@@ -46,7 +46,7 @@ static int	split_buffer_to_lines(char *buffer, ssize_t size, char **lines,
 	{
 		if (line_idx >= count)
 			return (1);
-		if (split_line_segment(buffer, lines, &line_idx, line_start, count))
+		if (split_line_segment(&buffer[line_start], lines, &line_idx, count))
 			return (1);
 	}
 	if (line_idx < count)
