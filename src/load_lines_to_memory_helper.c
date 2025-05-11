@@ -15,11 +15,16 @@
 #include <unistd.h>
 
 int	split_line_segment(char *buffer, char **lines, ssize_t *line_idx,
-		ssize_t line_start)
+		size_t line_start)
 {
 	if (copy_line_to_array(&buffer[line_start], lines, *line_idx))
 	{
 		free_lines(lines, *line_idx);
+		ssize_t i = *line_idx;
+		while (lines[i]) {
+			lines[i] = NULL;
+			i++;
+		}
 		return (1);
 	}
 	(*line_idx)++;
