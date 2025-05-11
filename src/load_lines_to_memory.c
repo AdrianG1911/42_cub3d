@@ -6,7 +6,7 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 00:00:00 by <yourlogin>       #+#    #+#             */
-/*   Updated: 2025/05/11 13:37:12 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/11 13:39:42 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static int	process_newline_segments(char *buffer, ssize_t size, char **lines, int count)
+static int	process_newline_segments(char *buffer, ssize_t size, char **lines,
+		int count)
 {
-	ssize_t i;
-	ssize_t line_start;
-	ssize_t line_idx;
+	ssize_t	i;
+	ssize_t	line_start;
+	ssize_t	line_idx;
 
 	i = 0;
 	line_start = 0;
@@ -31,21 +32,22 @@ static int	process_newline_segments(char *buffer, ssize_t size, char **lines, in
 			buffer[i] = '\0';
 			if (line_idx >= count)
 				return (-1);
-			if (split_line_segment(&buffer[line_start], lines, &line_idx, count))
+			if (split_line_segment(&buffer[line_start], lines, &line_idx,
+					count))
 				return (-1);
 			line_start = i + 1;
 		}
 		i++;
 	}
-	return (int)line_start | ((int)line_idx << 16);
+	return ((int)line_start | ((int)line_idx << 16));
 }
 
 static int	split_buffer_to_lines(char *buffer, ssize_t size, char **lines,
 		int count)
 {
-	ssize_t line_idx;
-	ssize_t line_start;
-	int packed;
+	ssize_t	line_idx;
+	ssize_t	line_start;
+	int		packed;
 
 	packed = process_newline_segments(buffer, size, lines, count);
 	line_start = (ssize_t)(packed & 0xFFFF);
