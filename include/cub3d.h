@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/05/06 14:26:25 by adrgutie         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:46:08 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,9 +210,13 @@ int					parse_color_line(char *line, t_gmap *gmap);
 void				init_gmap_colors(t_gmap *gmap);
 int					copy_line_to_array(char *buffer, char **lines, int i);
 
-int					split_line_segment(char *buffer, char **lines, ssize_t *line_idx, int count);
+int					split_line_segment(char *buffer, char **lines,
+						ssize_t *line_idx, int count);
 
-int					read_fd_to_buffer(int fd, char **out_buffer, ssize_t *out_size);
-int					read_file_to_buffer(const char *path, char **out_buffer, ssize_t *out_size);
+int					read_fd_to_buffer(int fd, char **out_buffer,
+						ssize_t *out_size);
+
+int					read_file_to_buffer(const char *path, char **out_buffer,
+						ssize_t *out_size);
 
 #endif
