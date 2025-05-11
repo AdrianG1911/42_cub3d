@@ -6,7 +6,7 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 00:00:00 by <yourlogin>       #+#    #+#             */
-/*   Updated: 2025/05/06 11:52:10 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/11 13:21:37 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ static int	read_file_to_buffer(const char *path, char **out_buffer,
 	return (result);
 }
 
-static int	split_buffer_to_lines(char *buffer, ssize_t size, char **lines, int count)
+static int	split_buffer_to_lines(char *buffer, ssize_t size, char **lines,
+		int count)
 {
 	ssize_t	i;
 	ssize_t	line_start;
@@ -71,8 +72,7 @@ static int	split_buffer_to_lines(char *buffer, ssize_t size, char **lines, int c
 			buffer[i] = '\0';
 			if (line_idx >= count)
 				return (1);
-			if (split_line_segment(buffer, lines, &line_idx, line_start,
-				count))
+			if (split_line_segment(buffer, lines, &line_idx, line_start, count))
 				return (1);
 			line_start = i + 1;
 		}
@@ -82,8 +82,7 @@ static int	split_buffer_to_lines(char *buffer, ssize_t size, char **lines, int c
 	{
 		if (line_idx >= count)
 			return (1);
-		if (split_line_segment(buffer, lines, &line_idx, line_start,
-			count))
+		if (split_line_segment(buffer, lines, &line_idx, line_start, count))
 			return (1);
 	}
 	if (line_idx < count)
