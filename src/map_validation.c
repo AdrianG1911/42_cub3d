@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
+/*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 11:21:12 by jidler            #+#    #+#             */
-/*   Updated: 2025/05/11 13:32:59 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/11 22:28:18 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	validate_grid_and_borders(const t_mapinfo *map_data, t_gmap *gmap,
 		printf("Error\nFailed to build 2D grid from map\n");
 		return (1);
 	}
-	if (check_borders(gmap, player_dir) == 1)
+	if (check_borders(gmap, player_dir) == 1 || flood_check(gmap) == 1)
 	{
 		printf("Error\nMap borders or player position invalid\n");
 		return (1);

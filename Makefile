@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+         #
+#    By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/23 20:11:53 by adrgutie          #+#    #+#              #
-#    Updated: 2025/05/06 11:44:32 by jidler           ###   ########.fr        #
+#    Updated: 2025/05/11 21:17:54 by adrgutie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRCS		=	src/main.c \
 				src/free_game.c \
 				src/extract_header_data_helper.c \
 				src/load_lines_to_memory_helper.c \
-				src/load_lines_to_memory_extra_helper.c
+				src/load_lines_to_memory_extra_helper.c \
+				src/map_arr_check.c
 
 
 OBJS		=	$(SRCS:src/%.c=$(OBJ_DIR)/%.o)

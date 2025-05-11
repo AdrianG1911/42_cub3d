@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
+/*   By: adrgutie <adrgutie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:02:18 by adrgutie          #+#    #+#             */
-/*   Updated: 2025/05/11 13:46:08 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/11 22:27:01 by adrgutie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,5 +218,7 @@ int					read_fd_to_buffer(int fd, char **out_buffer,
 
 int					read_file_to_buffer(const char *path, char **out_buffer,
 						ssize_t *out_size);
+
+int					flood_check(t_gmap *gmap);
 
 #endif
