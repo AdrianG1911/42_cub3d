@@ -213,4 +213,7 @@ int					copy_line_to_array(char *buffer, char **lines, int i);
 int					split_line_segment(char *buffer, char **lines,
 						ssize_t *line_idx, size_t line_start, int count);
 
+int					read_fd_to_buffer(int fd, char **out_buffer, ssize_t *out_size);
+int					read_file_to_buffer(const char *path, char **out_buffer, ssize_t *out_size);
+
 #endif

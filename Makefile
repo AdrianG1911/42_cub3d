@@ -37,7 +37,8 @@ SRCS		=	src/main.c \
 				src/check_border_helper.c \
 				src/free_game.c \
 				src/extract_header_data_helper.c \
-				src/load_lines_to_memory_helper.c
+				src/load_lines_to_memory_helper.c \
+				src/load_lines_to_memory_extra_helper.c
 
 
 OBJS		=	$(SRCS:src/%.c=$(OBJ_DIR)/%.o)
