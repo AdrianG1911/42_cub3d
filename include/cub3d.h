@@ -211,6 +211,6 @@ void				init_gmap_colors(t_gmap *gmap);
 int					copy_line_to_array(char *buffer, char **lines, int i);
 
 int					split_line_segment(char *buffer, char **lines,
-						ssize_t *line_idx, ssize_t line_start);
+						ssize_t *line_idx, size_t line_start);
 
 #endif
