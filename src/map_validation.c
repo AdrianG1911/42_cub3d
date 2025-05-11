@@ -93,7 +93,7 @@ t_gmap	validate_map(char *path)
 {
 	t_gmap		gmap;
 	t_mapinfo	map_data;
-	int			map_start_index;
+	int		map_start_index = -1;
 
 	map_data = (t_mapinfo){0};
 	if (validate_file_and_load(path, &map_data))
