@@ -6,7 +6,7 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 11:21:12 by jidler            #+#    #+#             */
-/*   Updated: 2025/05/11 13:23:22 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/11 13:32:59 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,9 @@ t_gmap	validate_map(char *path)
 {
 	t_gmap		gmap;
 	t_mapinfo	map_data;
-	int		map_start_index = -1;
+	int			map_start_index;
 
+	map_start_index = -1;
 	map_data = (t_mapinfo){0};
 	if (validate_file_and_load(path, &map_data))
 		exit(1);

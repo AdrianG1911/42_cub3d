@@ -6,16 +6,16 @@
 /*   By: jidler <jidler@student.42tokyo.jp >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 00:00:00 by jidler            #+#    #+#             */
-/*   Updated: 2025/05/11 00:00:00 by jidler           ###   ########.fr       */
+/*   Updated: 2025/05/11 13:33:25 by jidler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include <fcntl.h>
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-int read_fd_to_buffer(int fd, char **out_buffer, ssize_t *out_size)
+int	read_fd_to_buffer(int fd, char **out_buffer, ssize_t *out_size)
 {
 	char	*buffer;
 	ssize_t	total;
@@ -42,7 +42,7 @@ int read_fd_to_buffer(int fd, char **out_buffer, ssize_t *out_size)
 	return (0);
 }
 
-int read_file_to_buffer(const char *path, char **out_buffer, ssize_t *out_size)
+int	read_file_to_buffer(const char *path, char **out_buffer, ssize_t *out_size)
 {
 	int	fd;
 	int	result;
@@ -53,4 +53,4 @@ int read_file_to_buffer(const char *path, char **out_buffer, ssize_t *out_size)
 	result = read_fd_to_buffer(fd, out_buffer, out_size);
 	close(fd);
 	return (result);
-} 
+}
